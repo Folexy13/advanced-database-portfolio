@@ -1,0 +1,110 @@
+erDiagram
+    kyc_tiers ||--o{ customers : "governs kyc level"
+    customers ||--o{ accounts : "owns one or more"
+    customers ||--o{ beneficiaries : "maintains payees"
+    accounts ||--o{ transactions : "records ledger entries"
+    accounts ||--o{ transfers : "acts as source account"
+    transactions ||--o| transfers : "settlement specifics"
+    accounts ||--o{ fraud_alerts : "flags risk incidents"
+    transactions ||--o{ fraud_alerts : "associated flagged txn"
+
+    kyc_tiers {
+        int tier_level PK
+        string tier_name
+        numeric daily_transaction_limit
+        numeric single_transaction_limit
+        numeric max_balance_limit
+        text description
+        timestamp created_at
+    }
+
+    customers {
+        uuid customer_id PK
+        string first_name
+        string last_name
+        string email UK
+        string phone_number UK
+        string bvn_hash UK
+        string nin_hash UK
+        int kyc_tier FK
+        string account_status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    accounts {
+        uuid account_id PK
+        uuid customer_id FK
+        string account_number UK
+        string account_type
+        string currency
+        numeric available_balance
+        numeric ledger_balance
+        string account_status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    beneficiaries {
+        uuid beneficiary_id PK
+        uuid customer_id FK
+        string beneficiary_account_number
+        string bank_code
+        string bank_name
+        string account_name
+        string nickname
+        timestamp created_at
+    }
+
+    transactions {
+        uuid transaction_id PK
+        string transaction_reference UK
+        uuid account_id FK
+        string transaction_type
+        string category
+        numeric amount
+        numeric fee
+        numeric balance_after
+        string status
+        string narration
+        timestamp created_at
+    }
+
+    transfers {
+        uuid transfer_id PK
+        uuid transaction_id FK
+        uuid source_account_id FK
+        string destination_bank_code
+        string destination_bank_name
+        string destination_account_number
+        string destination_account_name
+        string nip_session_id UK
+        string channel
+        string transfer_status
+        timestamp created_at
+    }
+
+    fraud_alerts {
+        uuid alert_id PK
+        uuid account_id FK
+        uuid transaction_id FK
+        string rule_code
+        int risk_score
+        string severity
+        string status
+        text review_notes
+        timestamp created_at
+        timestamp resolved_at
+    }
+
+    audit_logs {
+        bigserial log_id PK
+        string table_name
+        string record_id
+        string action
+        jsonb old_state
+        jsonb new_state
+        string changed_by
+        string client_ip
+        timestamp created_at
+    }
