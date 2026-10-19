@@ -1,0 +1,62 @@
+services:
+  # ============================================================================
+  # FinPay Primary Relational Database (PostgreSQL 16)
+  # Used for Portfolios 1, 2, 3, and 5 (Core Ledger, Queries, ACID & Sharding)
+  # ============================================================================
+  finpay-postgres:
+    image: postgres:16-alpine
+    container_name: finpay-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-finpay_db}
+      POSTGRES_USER: ${POSTGRES_USER:-finpay_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-FinPaySecure2026!}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      # Defaults to host port 5434 to avoid collision with standard 5432/5433
+      - "${POSTGRES_PORT:-5434}:5432"
+    volumes:
+      - finpay_postgres_data:/var/lib/postgresql/data
+      # Automated initialization on first container creation
+      - ./portfolio-1-database-design/01-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./portfolio-1-database-design/02-constraints.sql:/docker-entrypoint-initdb.d/02-constraints.sql:ro
+      - ./portfolio-1-database-design/03-seed-data.sql:/docker-entrypoint-initdb.d/03-seed-data.sql:ro
+      # Mount directory for executing verification and analytical queries
+      - ./portfolio-1-database-design:/portfolio-1:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-finpay_admin} -d ${POSTGRES_DB:-finpay_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - finpay_network
+
+  # ============================================================================
+  # FinPay NoSQL Document Store (MongoDB 7.0)
+  # Pre-configured for Portfolio 4 (Audit Telemetry, Logs & Polyglot Persistence)
+  # ============================================================================
+  finpay-mongo:
+    image: mongo:7.0
+    container_name: finpay-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-finpay_mongo}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-FinPayMongo2026!}
+      MONGO_INITDB_DATABASE: ${MONGO_DB:-finpay_nosql}
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - finpay_mongo_data:/data/db
+    networks:
+      - finpay_network
+
+volumes:
+  finpay_postgres_data:
+    name: finpay_postgres_data
+  finpay_mongo_data:
+    name: finpay_mongo_data
+
+networks:
+  finpay_network:
+    name: finpay_network
+    driver: bridge

@@ -68,11 +68,38 @@ advanced-database-portfolio/
 
 ---
 
-## Technology Stack
+## Technology Stack & Environment
 - **Relational DBMS:** PostgreSQL 16 (strict constraint enforcement, JSONB audit capability, CTEs, and execution plan tooling)
 - **Document & Cache Stores:** MongoDB 7.0 / Redis 7.2 (telemetry, audit logs, and session locks)
 - **Modelling & Tooling:** Mermaid.js, DBeaver, `psql`, Git / GitHub
-- **Environment:** Linux / Dockerized Database Containers
+- **Containerization:** Docker Compose v2+
+
+---
+
+## Quick Start (Docker Environment)
+
+The repository provides a complete `docker-compose.yml` to instantly provision and seed the database environment without manual configuration:
+
+```bash
+# 1. Clone repository
+git clone https://github.com/Folexy13/advanced-database-portfolio.git
+cd advanced-database-portfolio
+
+# 2. Start PostgreSQL service (runs on port 5434)
+docker compose up -d finpay-postgres
+
+# 3. Run Portfolio 1 verification test suite
+docker compose exec finpay-postgres psql -U finpay_admin -d finpay_db -f /portfolio-1/04-verification-tests.sql
+
+# 4. Connect to interactive psql session
+docker compose exec -it finpay-postgres psql -U finpay_admin -d finpay_db
+```
+
+### Connection Credentials
+| Service | Host | Port | Database | User | Password |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **PostgreSQL** | `localhost` | `5434` | `finpay_db` | `finpay_admin` | `FinPaySecure2026!` |
+| **MongoDB** | `localhost` | `27017` | `finpay_nosql` | `finpay_mongo` | `FinPayMongo2026!` |
 
 ---
 

@@ -272,10 +272,23 @@ The baseline seed dataset (`03-seed-data.sql`) populates realistic Nigerian fina
 
 ---
 
-## 7. Instructions for Execution
+## 7. Instructions for Execution & Docker Environment
 
-To set up and verify Portfolio 1 on any PostgreSQL 14+ database:
+### Option A: Using Docker Compose (Recommended)
+The repository includes a root `docker-compose.yml` pre-configured to spin up PostgreSQL 16 on port `5434` (to prevent conflicts with any default 5432 instances), initialize the schema, apply triggers/constraints, and load the seed dataset automatically on startup.
 
+```bash
+# 1. Start the PostgreSQL container (from repository root)
+docker compose up -d finpay-postgres
+
+# 2. Execute the verification test suite
+docker compose exec finpay-postgres psql -U finpay_admin -d finpay_db -f /portfolio-1/04-verification-tests.sql
+
+# 3. Connect via interactive psql shell
+docker compose exec -it finpay-postgres psql -U finpay_admin -d finpay_db
+```
+
+### Option B: Local PostgreSQL Installation
 ```bash
 # 1. Connect to PostgreSQL and create database
 createdb finpay_db
@@ -292,3 +305,11 @@ psql -d finpay_db -f 03-seed-data.sql
 # 5. Execute Relational and Integrity Verification Tests
 psql -d finpay_db -f 04-verification-tests.sql
 ```
+
+### Database Connection Credentials
+- **Host:** `localhost`
+- **Port:** `5434` (Docker) or `5432` (Native)
+- **Database:** `finpay_db`
+- **Username:** `finpay_admin`
+- **Password:** `FinPaySecure2026!`
+- **Connection URL:** `postgresql://finpay_admin:FinPaySecure2026!@localhost:5434/finpay_db`
