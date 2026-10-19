@@ -312,4 +312,4 @@ psql -d finpay_db -f 04-verification-tests.sql
 - **Database:** `finpay_db`
 - **Username:** `finpay_admin`
 - **Password:** `FinPaySecure2026!`
-- **Connection URL:** `postgresql://finpay_admin:FinPaySecure2026!@localhost:5434/finpay_db`
+- **Connection URL Format:** `postgresql://<username>:<password>@localhost:5434/finpay_db`
