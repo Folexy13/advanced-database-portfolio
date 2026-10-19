@@ -63,8 +63,8 @@ VALUES
  NULL, NULL, 1, 'SUSPENDED'),
 
 ('a0000000-0000-0000-0000-000000000012', 'Ngozi', 'Okonjo', 'ngozi.okonjo@finpay.ng', '+2348037654321', 
- 'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d', 
- '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae', 3, 'ACTIVE');
+ '9a0f4438b8d4c9a83709b4d8307dbbe51909e46a788bb2cfae89921477431201', 
+ '8b1e5549c9e5da9481a0c5e9418eccf6201af57b899cc3dfbf90032588542312', 3, 'ACTIVE');
 
 -- ============================================================================
 -- 3. SEED: accounts (10-digit NUBAN Format)
