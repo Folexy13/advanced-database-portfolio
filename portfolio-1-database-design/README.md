@@ -20,6 +20,11 @@ Operating in a high-volume, regulated fintech environment requires strict data i
 
 The system architecture models eight core entities organized around customer identity, account ledgers, payment routing, risk surveillance, and immutable auditing.
 
+![FinPay Entity Relationship Diagram](er-diagram.png)
+
+<details>
+<summary>Click to view Mermaid ER diagram source code</summary>
+
 ```mermaid
 erDiagram
     kyc_tiers ||--o{ customers : "classifies"
@@ -132,6 +137,7 @@ erDiagram
         timestamp created_at
     }
 ```
+</details>
 
 ---
 
