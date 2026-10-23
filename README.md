@@ -30,9 +30,15 @@ advanced-database-portfolio/
 │   ├── 03-seed-data.sql                   # Realistic Nigerian fintech baseline dataset
 │   ├── 04-verification-tests.sql          # Schema validation & integrity assertions
 │   ├── er-diagram.mermaid                 # Entity-Relationship diagram source
-│   ├── er-diagram.png                     # Visual ER diagram export
+│   ├── er-diagram.png                     # Visual ER diagram export (raster)
+│   ├── er-diagram.svg                     # Visual ER diagram export (vector)
 │   └── README.md                          # Technical report: Normalisation (3NF/BCNF) & design decisions
-├── portfolio-2-query-optimisation/        # [Upcoming] Complex queries, EXPLAIN plans & indexing
+├── portfolio-2-query-optimisation/
+│   ├── 01-data-generator.sql              # Procedural generator (15,000+ txns, 100+ customers)
+│   ├── 02-unoptimized-queries.sql         # 5 banking analytical queries with baseline EXPLAIN plans
+│   ├── 03-optimization-indexes.sql        # Partial, composite, and covering indexes
+│   ├── 04-optimized-queries.sql           # Post-index EXPLAIN (ANALYZE, BUFFERS) execution
+│   └── README.md                          # Technical report: Benchmark analysis & optimizer internals
 ├── portfolio-3-transactions-concurrency/  # [Upcoming] ACID guarantees, deadlocks & isolation levels
 ├── portfolio-4-nosql/                     # [Upcoming] Polyglot model (MongoDB/Redis) for event audit & logs
 ├── portfolio-5-distributed-cloud/         # [Upcoming] Replication, sharding & cloud DR architecture
@@ -58,8 +64,8 @@ advanced-database-portfolio/
 
 | Milestone | Component Title | Weight | Status |
 | :--- | :--- | :---: | :---: |
-| **Portfolio 1** | Database Design and Modelling | 7 Marks | **In Progress** |
-| **Portfolio 2** | Query Processing and Optimisation | 7 Marks | Scheduled |
+| **Portfolio 1** | Database Design and Modelling | 7 Marks | **Completed** |
+| **Portfolio 2** | Query Processing and Optimisation | 7 Marks | **Completed** |
 | **Portfolio 3** | Transactions and Concurrency | 7 Marks | Scheduled |
 | **Portfolio 4** | NoSQL and Advanced Data Models | 7 Marks | Scheduled |
 | **Portfolio 5** | Distributed and Cloud Database Exercise | 6 Marks | Scheduled |
