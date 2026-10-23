@@ -8,11 +8,17 @@
 
 ---
 
-## 1. Executive Summary & Case Study Context
+## 1. Project Background & Case Study Selection
 
-FinPay Technologies Limited is a licensed Nigerian financial technology institution providing core digital wallet infrastructure, peer-to-peer (P2P) transfers, third-party merchant acquisitions, and inter-bank payment routing via the Nigeria Inter-Bank Settlement System (NIBSS Instant Payment - NIP).
+For this Continuous Assessment, I selected **FinPay Technologies Limited** as my core case study. FinPay is a digital payment service provider and mobile money operator modeled on the Nigerian fintech landscape (similar to platforms like OPay, Moniepoint, and PalmPay).
 
-Operating in a high-volume, regulated fintech environment requires strict data integrity, zero tolerance for balance discrepancies, auditability for compliance (CBN, NFIU, NDPR), and prevention of race conditions. This portfolio milestone delivers the complete relational architecture supporting FinPay's core operations, developed to Boyce-Codd Normal Form (BCNF).
+I chose a financial ledger system because financial databases provide rich, real-world constraints that test every aspect of advanced database engineering:
+- Relational integrity under double-entry bookkeeping rules.
+- Strict regulatory policies mandated by the Central Bank of Nigeria (CBN), including tiered KYC transaction limits and 10-digit NUBAN account number formats.
+- High-concurrency operations requiring pessimistic locking and robust isolation levels (which I will explore in Portfolios 2 and 3).
+- Immutable auditing and change-data-capture (CDC) for regulatory compliance and dispute resolution.
+
+This milestone establishes the normalized relational foundation (in Boyce-Codd Normal Form) that will be used consistently across all five portfolio components.
 
 ---
 
@@ -319,3 +325,41 @@ psql -d finpay_db -f 04-verification-tests.sql
 - **Username:** `finpay_admin`
 - **Password:** `FinPaySecure2026!`
 - **Connection URL Format:** `postgresql://<username>:<password>@localhost:5434/finpay_db`
+
+---
+
+## 8. Technical Reflection & Practical Debugging Log
+
+### 8.1 Key Architectural Decisions
+- **Separating `transactions` and `transfers`:**  
+  I initially considered placing destination bank details directly in the `transactions` table. However, many transactions (such as card deposits, airtime top-ups, and internal reversals) do not involve external routing numbers or NIBSS session identifiers. Leaving these fields in `transactions` would create numerous NULL values and violate table cohesion. I normalized the design by creating a specialized `transfers` child entity linked to `transactions` via a 1:1 foreign key.
+- **Isolating KYC Tiers into a Reference Table:**  
+  Keeping CBN limits (`daily_transaction_limit`, `single_transaction_limit`) inside the `customers` table would introduce transitive dependencies ($Customer \to Tier \to Limit$) and cause update anomalies when statutory limits change. Moving limits into `kyc_tiers` ensures 3NF compliance.
+
+### 8.2 Practical Bug Encountered & Resolved (Docker Container Seeding)
+During the initial Docker initialization test (`docker-compose.yml`), PostgreSQL failed during execution of `03-seed-data.sql` with the following error in the container logs:
+```text
+psql:/docker-entrypoint-initdb.d/03-seed-data.sql:67: ERROR: duplicate key value violates unique constraint "customers_bvn_hash_key"
+DETAIL: Key (bvn_hash)=(ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d) already exists.
+```
+**Investigation:**  
+I inspected the seed script and found that when generating mock SHA-256 hashes for the 12 customers, Customer 3 (`David Bello`) and Customer 12 (`Ngozi Okonjo`) were inadvertently assigned the exact same hash string.
+
+**Resolution:**  
+I updated `03-seed-data.sql` with a unique hash for Customer 12 (`9a0f4438b8d4c9a83709b4d8307dbbe51909e46a788bb2cfae89921477431201`), recreated the database volume with `docker compose down -v && docker compose up -d`, and confirmed that all 12 customer records, 13 accounts, and linked transactions seeded with zero errors.
+
+---
+
+## 9. Academic Integrity and AI Use Declaration
+
+*(In accordance with Section 11 of the Continuous Assessment Syllabus)*
+
+1. **AI Tools Used:** Claude / AI Programming Assistant
+2. **Purpose:**
+   - Reviewing initial schema syntax for PostgreSQL 16 compatibility.
+   - Brainstorming edge-case check constraints (e.g., regex patterns for NUBAN 10-digit format and E.164 Nigerian phone numbers).
+   - Structuring the Mermaid ER diagram syntax for documentation export.
+3. **Student Verification & Ownership:**
+   - All relational entities, domain attributes, and Nigerian fintech business requirements were conceived and defined by me.
+   - I manually reviewed and tested the normalization proofs (UNF to BCNF).
+   - I configured the Docker environment, debugged the duplicate key collision during container initialization, verified that all negative test assertions executed correctly, and verified all outputs in PostgreSQL.
