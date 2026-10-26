@@ -23,6 +23,8 @@ services:
       - ./portfolio-1-database-design/03-seed-data.sql:/docker-entrypoint-initdb.d/03-seed-data.sql:ro
       # Mount directory for executing verification and analytical queries
       - ./portfolio-1-database-design:/portfolio-1:ro
+      - ./portfolio-2-query-optimisation:/portfolio-2:ro
+      - ./portfolio-3-transactions-concurrency:/portfolio-3:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-finpay_admin} -d ${POSTGRES_DB:-finpay_db}"]
       interval: 5s
@@ -44,9 +46,11 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-FinPayMongo2026!}
       MONGO_INITDB_DATABASE: ${MONGO_DB:-finpay_nosql}
     ports:
-      - "${MONGO_PORT:-27017}:27017"
+      # Defaults to host port 27018 to avoid collisions with default local mongo instances
+      - "${MONGO_PORT:-27018}:27017"
     volumes:
       - finpay_mongo_data:/data/db
+      - ./portfolio-4-nosql:/portfolio-4:ro
     networks:
       - finpay_network
 
