@@ -1,0 +1,64 @@
+Running Test 1: Atomic Transfer with Commit
+ account_number | account_type | available_balance | ledger_balance | account_status 
+----------------+--------------+-------------------+----------------+----------------
+ 0123456789     | SAVINGS      |       119000.0000 |    119000.0000 | ACTIVE
+ 0223456781     | SAVINGS      |       266000.0000 |    266000.0000 | ACTIVE
+(2 rows)
+
+ transfer_status |             message              |     transaction_reference      | source_balance_after | fee_charged 
+-----------------+----------------------------------+--------------------------------+----------------------+-------------
+ SUCCESS         | Transfer processed successfully. | FP-TRF-20261027183355215-3ecb9 |          114000.0000 |      0.0000
+(1 row)
+
+ account_number | account_type | available_balance | ledger_balance | account_status 
+----------------+--------------+-------------------+----------------+----------------
+ 0123456789     | SAVINGS      |       114000.0000 |    114000.0000 | ACTIVE
+ 0223456781     | SAVINGS      |       271000.0000 |    271000.0000 | ACTIVE
+(2 rows)
+
+     transaction_reference      |              account_id              | account_number | transaction_type |  amount   |  fee   | balance_after | status  |                      narration                      |          created_at           
+--------------------------------+--------------------------------------+----------------+------------------+-----------+--------+---------------+---------+-----------------------------------------------------+-------------------------------
+ FP-TRF-20261027181201375-c7f8a | b0000000-0000-0000-0000-000000000001 | 0123456789     | DEBIT            | 5000.0000 | 0.0000 |   120000.0000 | SUCCESS | Tuition fee reimbursement                           | 2026-10-27 18:12:01.375619+00
+ FP-CRD-20261027181201375-2ceb2 | b0000000-0000-0000-0000-000000000003 | 0223456781     | CREDIT           | 5000.0000 | 0.0000 |   115000.0000 | SUCCESS | Transfer from 0123456789: Tuition fee reimbursement | 2026-10-27 18:12:01.375619+00
+ FP-TRF-20261027183355215-3ecb9 | b0000000-0000-0000-0000-000000000001 | 0123456789     | DEBIT            | 5000.0000 | 0.0000 |   114000.0000 | SUCCESS | Tuition fee reimbursement                           | 2026-10-27 18:33:55.215139+00
+ FP-CRD-20261027183355215-28cb0 | b0000000-0000-0000-0000-000000000003 | 0223456781     | CREDIT           | 5000.0000 | 0.0000 |   271000.0000 | SUCCESS | Transfer from 0123456789: Tuition fee reimbursement | 2026-10-27 18:33:55.215139+00
+(4 rows)
+
+Running Test 2: Insufficient Funds Rollback
+ account_number | available_balance | ledger_balance 
+----------------+-------------------+----------------
+ 0723456786     |         8500.0000 |      8500.0000
+(1 row)
+
+NOTICE:  Rollback verified: Transfer rejected: Insufficient funds. Available: 8500.0000 NGN, Required: 50000.0000 NGN.
+DO
+ account_number | available_balance | ledger_balance 
+----------------+-------------------+----------------
+ 0723456786     |         8500.0000 |      8500.0000
+(1 row)
+
+Running Test 3: Frozen Account Debit Block
+ account_number | account_status | available_balance 
+----------------+----------------+-------------------
+ 0124456789     | FROZEN_PND     |        12000.0000
+(1 row)
+
+NOTICE:  Rollback verified: Transfer rejected: Source account 0124456789 is in FROZEN_PND status (Debits restricted).
+DO
+ account_number | account_status | available_balance 
+----------------+----------------+-------------------
+ 0124456789     | FROZEN_PND     |        12000.0000
+(1 row)
+
+Running Test 4: Sub-transaction Savepoint Rollback
+NOTICE:  Starting transaction. Initial balance: 114000.0000 NGN
+NOTICE:  Leg 1 finished.
+NOTICE:  Caught division by zero. Rolled back sub-operation 2 to savepoint.
+NOTICE:  Outer transaction committed. Leg 1 preserved.
+DO
+ account_number | available_balance 
+----------------+-------------------
+ 0123456789     |       113000.0000
+ 0223456781     |       272000.0000
+(2 rows)
+

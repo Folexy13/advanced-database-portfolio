@@ -3,6 +3,7 @@
 Thumbs.db
 *.tmp
 *.log
+!**/evidence/*.log
 
 # Editor configurations
 .vscode/

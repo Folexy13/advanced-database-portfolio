@@ -1,0 +1,16 @@
+Testing Non-Repeatable Read (READ COMMITTED)
+NOTICE:  Initial read (T0): 113000.0000 NGN
+NOTICE:  Subsequent read (T1): 115500.0000 NGN
+NOTICE:  Non-Repeatable read observed. Balance changed mid-transaction.
+DO
+Testing Snapshot Isolation (REPEATABLE READ)
+NOTICE:  Snapshot read at start of transaction: 113000.0000 NGN
+NOTICE:  REPEATABLE READ guarantees stable snapshot views across analytical reporting.
+DO
+Current Transaction Isolation Settings
+             name              |    setting     | unit |                          short_desc                           
+-------------------------------+----------------+------+---------------------------------------------------------------
+ default_transaction_isolation | read committed |      | Sets the transaction isolation level of each new transaction.
+ transaction_isolation         | read committed |      | Sets the current transaction's isolation level.
+(2 rows)
+

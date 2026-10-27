@@ -1,0 +1,166 @@
+Suspicious VPN & Foreign Access Queries
+[
+  {
+    customer_id: 'a0000000-0000-0000-0000-000000000011',
+    device_id: 'DEV-UNKNOWN-LINUX-BOT9',
+    ip_address: '185.220.101.5',
+    event_type: 'PASSWORD_RESET',
+    timestamp: ISODate('2026-10-18T02:16:40.000Z'),
+    location: 'Frankfurt, Germany',
+    connection: 'VPN',
+    carrier: 'Tor Exit Node / Hosting Provider'
+  },
+  {
+    customer_id: 'a0000000-0000-0000-0000-000000000011',
+    device_id: 'DEV-UNKNOWN-LINUX-BOT9',
+    ip_address: '185.220.101.5',
+    event_type: 'APP_LOGIN',
+    timestamp: ISODate('2026-10-18T02:15:30.000Z'),
+    location: 'Frankfurt, Germany',
+    connection: 'VPN',
+    carrier: 'Tor Exit Node / Hosting Provider'
+  }
+]
+Customer Device Diversity & Platform Velocity
+[
+  {
+    total_events: 3,
+    latest_activity: ISODate('2026-10-18T02:16:40.000Z'),
+    customer_id: 'a0000000-0000-0000-0000-000000000011',
+    device_count: 2,
+    devices_used: [
+      'DEV-TECNO-CAMON20-E552K',
+      'DEV-UNKNOWN-LINUX-BOT9'
+    ],
+    platforms_used: [
+      'ANDROID',
+      'WEB_PORTAL'
+    ],
+    locations: [
+      'Frankfurt',
+      'Lagos'
+    ]
+  },
+  {
+    total_events: 2,
+    latest_activity: ISODate('2026-10-15T08:18:45.000Z'),
+    customer_id: 'a0000000-0000-0000-0000-000000000001',
+    device_count: 1,
+    devices_used: [
+      'DEV-APPLE-IPHONE15-A109B'
+    ],
+    platforms_used: [
+      'IOS'
+    ],
+    locations: [
+      'Lagos'
+    ]
+  },
+  {
+    total_events: 2,
+    latest_activity: ISODate('2026-10-16T10:31:12.000Z'),
+    customer_id: 'a0000000-0000-0000-0000-000000000002',
+    device_count: 1,
+    devices_used: [
+      'DEV-SAMSUNG-S24-B908C'
+    ],
+    platforms_used: [
+      'ANDROID'
+    ],
+    locations: [
+      'Abuja'
+    ]
+  },
+  {
+    total_events: 1,
+    latest_activity: ISODate('2026-10-17T14:00:00.000Z'),
+    customer_id: 'a0000000-0000-0000-0000-000000000003',
+    device_count: 1,
+    devices_used: [
+      'DEV-CHROME-MACBOOK-C441D'
+    ],
+    platforms_used: [
+      'WEB_PORTAL'
+    ],
+    locations: [
+      'Port Harcourt'
+    ]
+  }
+]
+Fraud Case Remediation Breakdown
+[
+  {
+    remediation_action: 'KYC_UPGRADE_OFFER_SMS',
+    frequency: 1,
+    avg_risk_score: 72,
+    cases: [
+      'CASE-2026-OCT-002'
+    ]
+  },
+  {
+    remediation_action: 'DEVICE_REVOKE',
+    frequency: 1,
+    avg_risk_score: 95,
+    cases: [
+      'CASE-2026-OCT-001'
+    ]
+  },
+  {
+    remediation_action: 'ACCOUNT_PND_FREEZE',
+    frequency: 1,
+    avg_risk_score: 95,
+    cases: [
+      'CASE-2026-OCT-001'
+    ]
+  },
+  {
+    remediation_action: 'PASSWORD_INVALIDATION',
+    frequency: 1,
+    avg_risk_score: 95,
+    cases: [
+      'CASE-2026-OCT-001'
+    ]
+  }
+]
+Multi-Faceted Security Dashboard Summary
+[
+  {
+    platform_distribution: [
+      {
+        _id: 'ANDROID',
+        count: 3
+      },
+      {
+        _id: 'WEB_PORTAL',
+        count: 3
+      },
+      {
+        _id: 'IOS',
+        count: 2
+      }
+    ],
+    event_type_summary: [
+      {
+        _id: 'APP_LOGIN',
+        count: 5
+      },
+      {
+        _id: 'TRANSFER_CONFIRM',
+        count: 1
+      },
+      {
+        _id: 'PASSWORD_RESET',
+        count: 1
+      },
+      {
+        _id: 'BIOMETRIC_AUTH',
+        count: 1
+      }
+    ],
+    vpn_usage_count: [
+      {
+        total_vpn_detected: 2
+      }
+    ]
+  }
+]

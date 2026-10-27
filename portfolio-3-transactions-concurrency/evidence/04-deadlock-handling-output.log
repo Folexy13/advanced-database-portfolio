@@ -1,0 +1,21 @@
+PostgreSQL Deadlock Configuration
+       name        | setting | unit |                          short_desc                           
+-------------------+---------+------+---------------------------------------------------------------
+ deadlock_timeout  | 1000    | ms   | Sets the time to wait on a lock before checking for deadlock.
+ lock_timeout      | 0       | ms   | Sets the maximum allowed duration of any wait for a lock.
+ statement_timeout | 0       | ms   | Sets the maximum allowed duration of any statement.
+(3 rows)
+
+Testing Bidirectional Transfers with Ordered Locking
+NOTICE:  Transfer 1: 0123456789 -> 0223456781 (Source < Destination)
+NOTICE:  Transfer 1 completed: SUCCESS (Ref: FP-TRF-20261027183356466-487e2)
+NOTICE:  Transfer 2: 0223456781 -> 0123456789 (Source > Destination, reverse transfer)
+NOTICE:  Transfer 2 completed: SUCCESS (Ref: FP-TRF-20261027183356466-27ef8)
+NOTICE:  Both transfers completed successfully with zero deadlocks.
+DO
+ account_number | account_type | available_balance | ledger_balance 
+----------------+--------------+-------------------+----------------
+ 0123456789     | SAVINGS      |       113000.0000 |    113000.0000
+ 0223456781     | SAVINGS      |       272000.0000 |    272000.0000
+(2 rows)
+

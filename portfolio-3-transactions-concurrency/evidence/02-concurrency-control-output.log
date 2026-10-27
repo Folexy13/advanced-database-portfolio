@@ -1,0 +1,23 @@
+ locktype | table_name | mode | granted | pid 
+----------+------------+------+---------+-----
+(0 rows)
+
+Testing Pessimistic Locking (SELECT FOR UPDATE)
+NOTICE:  Executing Transfer 1 (150,000 NGN)...
+ERROR:  Transfer rejected: Insufficient funds. Available: 80000.0000 NGN, Required: 150000.0000 NGN.
+CONTEXT:  PL/pgSQL function sp_execute_fund_transfer(character,character,character varying,character varying,character varying,numeric,character varying,character varying) line 105 at RAISE
+SQL statement "SELECT *             FROM sp_execute_fund_transfer(
+        '0323456782', '0223456781', '000000', 'FinPay Internal', 'Sarah Okafor',
+        150000.0000, 'Legitimate concurrent transfer 1', 'MOBILE_APP'
+    )"
+PL/pgSQL function inline_code_block line 7 at SQL statement
+ account_number | account_type | available_balance | ledger_balance 
+----------------+--------------+-------------------+----------------
+ 0323456782     | CURRENT      |        80000.0000 |     80000.0000
+(1 row)
+
+Testing Optimistic Concurrency Control (OCC)
+NOTICE:  Client read version token: 2026-10-27 18:12:32.113963+00
+NOTICE:  Concurrent update committed.
+NOTICE:  OCC Conflict detected: 0 rows updated because record was modified concurrently.
+DO

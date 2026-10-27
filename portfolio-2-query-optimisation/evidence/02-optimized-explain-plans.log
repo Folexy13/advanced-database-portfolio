@@ -1,0 +1,232 @@
+                                                                                               QUERY PLAN                                                                                               
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=15.63..15.63 rows=1 width=121) (actual time=0.225..0.231 rows=0 loops=1)
+   Output: a.account_id, a.account_number, ((((c.first_name)::text || ' '::text) || (c.last_name)::text)), (count(t.transaction_id)), (sum(t.amount)), (max(t.created_at)), c.first_name, c.last_name
+   Sort Key: (sum(t.amount)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=12
+   ->  GroupAggregate  (cost=15.57..15.62 rows=1 width=121) (actual time=0.156..0.162 rows=0 loops=1)
+         Output: a.account_id, a.account_number, (((c.first_name)::text || ' '::text) || (c.last_name)::text), count(t.transaction_id), sum(t.amount), max(t.created_at), c.first_name, c.last_name
+         Group Key: a.account_id, c.first_name, c.last_name
+         Filter: ((count(t.transaction_id) >= 3) AND (sum(t.amount) > 100000.0000))
+         Buffers: shared hit=9
+         ->  Sort  (cost=15.57..15.58 rows=1 width=73) (actual time=0.154..0.159 rows=0 loops=1)
+               Output: a.account_id, c.first_name, c.last_name, a.account_number, t.transaction_id, t.amount, t.created_at
+               Sort Key: a.account_id, c.first_name, c.last_name
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=9
+               ->  Nested Loop  (cost=8.46..15.56 rows=1 width=73) (actual time=0.065..0.069 rows=0 loops=1)
+                     Output: a.account_id, c.first_name, c.last_name, a.account_number, t.transaction_id, t.amount, t.created_at
+                     Inner Unique: true
+                     Buffers: shared hit=3
+                     ->  Hash Join  (cost=8.32..15.29 rows=1 width=75) (actual time=0.063..0.067 rows=0 loops=1)
+                           Output: t.transaction_id, t.amount, t.created_at, a.account_id, a.account_number, a.customer_id
+                           Hash Cond: (a.account_id = t.account_id)
+                           Buffers: shared hit=3
+                           ->  Seq Scan on public.accounts a  (cost=0.00..6.15 rows=215 width=43) (actual time=0.009..0.010 rows=1 loops=1)
+                                 Output: a.account_id, a.customer_id, a.account_number, a.account_type, a.currency, a.available_balance, a.ledger_balance, a.account_status, a.created_at, a.updated_at
+                                 Buffers: shared hit=1
+                           ->  Hash  (cost=8.31..8.31 rows=1 width=48) (actual time=0.031..0.033 rows=0 loops=1)
+                                 Output: t.transaction_id, t.amount, t.created_at, t.account_id
+                                 Buckets: 1024  Batches: 1  Memory Usage: 8kB
+                                 Buffers: shared hit=2
+                                 ->  Index Scan using idx_transactions_created_at on public.transactions t  (cost=0.29..8.31 rows=1 width=48) (actual time=0.030..0.031 rows=0 loops=1)
+                                       Output: t.transaction_id, t.amount, t.created_at, t.account_id
+                                       Index Cond: ((t.created_at >= '2026-07-31 23:00:00+00'::timestamp with time zone) AND (t.created_at <= '2026-08-31 22:59:59+00'::timestamp with time zone))
+                                       Filter: (((t.category)::text = ANY ('{INTRA_TRANSFER,INTER_TRANSFER_NIP}'::text[])) AND ((t.transaction_type)::text = 'DEBIT'::text))
+                                       Buffers: shared hit=2
+                     ->  Index Scan using customers_pkey on public.customers c  (cost=0.14..0.27 rows=1 width=30) (never executed)
+                           Output: c.customer_id, c.first_name, c.last_name, c.email, c.phone_number, c.bvn_hash, c.nin_hash, c.kyc_tier, c.account_status, c.created_at, c.updated_at
+                           Index Cond: (c.customer_id = a.customer_id)
+ Planning:
+   Buffers: shared hit=530
+ Planning Time: 7.587 ms
+ Execution Time: 0.418 ms
+(42 rows)
+
+                                                                                                                                 QUERY PLAN                                                                                                                                  
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=22.45..22.45 rows=1 width=107) (actual time=0.083..0.087 rows=1 loops=1)
+   Output: tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status, (count(tr.transfer_id)), (sum(t.amount)), (avg(t.amount))
+   Sort Key: (sum(t.amount)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=5
+   ->  GroupAggregate  (cost=22.35..22.44 rows=1 width=107) (actual time=0.067..0.070 rows=1 loops=1)
+         Output: tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status, count(tr.transfer_id), sum(t.amount), avg(t.amount)
+         Group Key: tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status
+         Buffers: shared hit=5
+         ->  Incremental Sort  (cost=22.35..22.40 rows=2 width=59) (actual time=0.054..0.057 rows=1 loops=1)
+               Output: tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status, tr.transfer_id, t.amount
+               Sort Key: tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status
+               Presorted Key: tr.destination_bank_code
+               Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
+               Buffers: shared hit=5
+               ->  Nested Loop  (cost=0.43..22.34 rows=1 width=59) (actual time=0.041..0.044 rows=1 loops=1)
+                     Output: tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status, tr.transfer_id, t.amount
+                     Inner Unique: true
+                     Buffers: shared hit=5
+                     ->  Index Scan using idx_transfers_exceptions_partial on public.transfers tr  (cost=0.14..14.04 rows=1 width=67) (actual time=0.023..0.025 rows=1 loops=1)
+                           Output: tr.transfer_id, tr.transaction_id, tr.source_account_id, tr.destination_bank_code, tr.destination_bank_name, tr.destination_account_number, tr.destination_account_name, tr.nip_session_id, tr.channel, tr.transfer_status, tr.created_at
+                           Index Cond: (tr.created_at >= '2026-05-31 23:00:00+00'::timestamp with time zone)
+                           Buffers: shared hit=2
+                     ->  Index Scan using transactions_pkey on public.transactions t  (cost=0.29..8.30 rows=1 width=24) (actual time=0.012..0.012 rows=1 loops=1)
+                           Output: t.transaction_id, t.transaction_reference, t.account_id, t.transaction_type, t.category, t.amount, t.fee, t.balance_after, t.status, t.narration, t.created_at
+                           Index Cond: (t.transaction_id = tr.transaction_id)
+                           Buffers: shared hit=3
+ Planning:
+   Buffers: shared hit=107
+ Planning Time: 1.291 ms
+ Execution Time: 0.173 ms
+(31 rows)
+
+                                                                                                                               QUERY PLAN                                                                                                                                
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=192.42..192.60 rows=70 width=157) (actual time=0.538..0.561 rows=76 loops=1)
+   Output: t.created_at, t.transaction_reference, t.transaction_type, t.category, t.amount, t.fee, t.narration, (sum(CASE WHEN ((t.transaction_type)::text = 'CREDIT'::text) THEN t.amount ELSE (- (t.amount + t.fee)) END) OVER (?)), t.balance_after, t.account_id
+   Sort Key: t.created_at DESC
+   Sort Method: quicksort  Memory: 37kB
+   Buffers: shared hit=12
+   ->  WindowAgg  (cost=188.35..190.28 rows=70 width=157) (actual time=0.312..0.450 rows=76 loops=1)
+         Output: t.created_at, t.transaction_reference, t.transaction_type, t.category, t.amount, t.fee, t.narration, sum(CASE WHEN ((t.transaction_type)::text = 'CREDIT'::text) THEN t.amount ELSE (- (t.amount + t.fee)) END) OVER (?), t.balance_after, t.account_id
+         Buffers: shared hit=9
+         ->  Sort  (cost=188.35..188.53 rows=70 width=125) (actual time=0.290..0.314 rows=76 loops=1)
+               Output: t.created_at, t.account_id, t.transaction_reference, t.transaction_type, t.category, t.amount, t.fee, t.narration, t.balance_after
+               Sort Key: t.account_id, t.created_at
+               Sort Method: quicksort  Memory: 36kB
+               Buffers: shared hit=9
+               ->  Nested Loop  (cost=4.83..186.21 rows=70 width=125) (actual time=0.120..0.221 rows=76 loops=1)
+                     Output: t.created_at, t.account_id, t.transaction_reference, t.transaction_type, t.category, t.amount, t.fee, t.narration, t.balance_after
+                     Buffers: shared hit=9
+                     ->  Seq Scan on public.accounts a  (cost=0.00..6.69 rows=1 width=16) (actual time=0.046..0.048 rows=1 loops=1)
+                           Output: a.account_id, a.customer_id, a.account_number, a.account_type, a.currency, a.available_balance, a.ledger_balance, a.account_status, a.created_at, a.updated_at
+                           Filter: (a.account_number = '0123456789'::bpchar)
+                           Rows Removed by Filter: 214
+                           Buffers: shared hit=4
+                     ->  Bitmap Heap Scan on public.transactions t  (cost=4.83..178.82 rows=70 width=125) (actual time=0.065..0.116 rows=76 loops=1)
+                           Output: t.transaction_id, t.transaction_reference, t.account_id, t.transaction_type, t.category, t.amount, t.fee, t.balance_after, t.status, t.narration, t.created_at
+                           Recheck Cond: (t.account_id = a.account_id)
+                           Filter: (t.created_at >= '2026-04-30 23:00:00+00'::timestamp with time zone)
+                           Heap Blocks: exact=3
+                           Buffers: shared hit=5
+                           ->  Bitmap Index Scan on idx_transactions_account_id  (cost=0.00..4.81 rows=70 width=0) (actual time=0.053..0.053 rows=76 loops=1)
+                                 Index Cond: (t.account_id = a.account_id)
+                                 Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=30
+ Planning Time: 0.745 ms
+ Execution Time: 0.768 ms
+(34 rows)
+
+                                                                                                                                  QUERY PLAN                                                                                                                                   
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=803.61..804.43 rows=329 width=153) (actual time=27.522..27.573 rows=164 loops=1)
+   Output: (date_trunc('day'::text, t.created_at)), a.account_number, ((((c.first_name)::text || ' '::text) || (c.last_name)::text)), kt.tier_name, kt.daily_transaction_limit, (sum(t.amount)), (((sum(t.amount)) - kt.daily_transaction_limit)), (count(t.transaction_id))
+   Sort Key: (date_trunc('day'::text, t.created_at)) DESC, (((sum(t.amount)) - kt.daily_transaction_limit)) DESC
+   Sort Method: quicksort  Memory: 43kB
+   Buffers: shared hit=351
+   ->  Hash Join  (cost=729.73..789.85 rows=329 width=153) (actual time=26.672..27.152 rows=164 loops=1)
+         Output: (date_trunc('day'::text, t.created_at)), a.account_number, (((c.first_name)::text || ' '::text) || (c.last_name)::text), kt.tier_name, kt.daily_transaction_limit, (sum(t.amount)), ((sum(t.amount)) - kt.daily_transaction_limit), (count(t.transaction_id))
+         Inner Unique: true
+         Hash Cond: (c.kyc_tier = kt.tier_level)
+         Join Filter: ((sum(t.amount)) > kt.daily_transaction_limit)
+         Rows Removed by Join Filter: 57
+         Buffers: shared hit=351
+         ->  Hash Join  (cost=728.66..782.23 rows=987 width=77) (actual time=26.612..26.919 rows=221 loops=1)
+               Output: (date_trunc('day'::text, t.created_at)), a.account_number, (sum(t.amount)), (count(t.transaction_id)), c.first_name, c.last_name, c.kyc_tier
+               Inner Unique: true
+               Hash Cond: (a.customer_id = c.customer_id)
+               Buffers: shared hit=350
+               ->  HashAggregate  (cost=722.37..751.39 rows=1935 width=91) (actual time=26.447..26.588 rows=221 loops=1)
+                     Output: (date_trunc('day'::text, t.created_at)), a.account_id, a.account_number, a.customer_id, sum(t.amount), count(t.transaction_id)
+                     Group Key: date_trunc('day'::text, t.created_at), a.account_id
+                     Batches: 1  Memory Usage: 241kB
+                     Buffers: shared hit=346
+                     ->  Hash Join  (cost=8.84..625.90 rows=9647 width=75) (actual time=0.310..19.313 rows=9723 loops=1)
+                           Output: date_trunc('day'::text, t.created_at), a.account_id, a.account_number, a.customer_id, t.amount, t.transaction_id
+                           Inner Unique: true
+                           Hash Cond: (t.account_id = a.account_id)
+                           Buffers: shared hit=346
+                           ->  Seq Scan on public.transactions t  (cost=0.00..567.12 rows=9647 width=48) (actual time=0.009..7.918 rows=9723 loops=1)
+                                 Output: t.transaction_id, t.transaction_reference, t.account_id, t.transaction_type, t.category, t.amount, t.fee, t.balance_after, t.status, t.narration, t.created_at
+                                 Filter: (((t.transaction_type)::text = 'DEBIT'::text) AND ((t.status)::text = 'SUCCESS'::text))
+                                 Rows Removed by Filter: 5295
+                                 Buffers: shared hit=342
+                           ->  Hash  (cost=6.15..6.15 rows=215 width=43) (actual time=0.260..0.262 rows=215 loops=1)
+                                 Output: a.account_id, a.account_number, a.customer_id
+                                 Buckets: 1024  Batches: 1  Memory Usage: 24kB
+                                 Buffers: shared hit=4
+                                 ->  Seq Scan on public.accounts a  (cost=0.00..6.15 rows=215 width=43) (actual time=0.007..0.114 rows=215 loops=1)
+                                       Output: a.account_id, a.account_number, a.customer_id
+                                       Buffers: shared hit=4
+               ->  Hash  (cost=5.02..5.02 rows=102 width=34) (actual time=0.143..0.144 rows=102 loops=1)
+                     Output: c.first_name, c.last_name, c.customer_id, c.kyc_tier
+                     Buckets: 1024  Batches: 1  Memory Usage: 15kB
+                     Buffers: shared hit=4
+                     ->  Seq Scan on public.customers c  (cost=0.00..5.02 rows=102 width=34) (actual time=0.008..0.068 rows=102 loops=1)
+                           Output: c.first_name, c.last_name, c.customer_id, c.kyc_tier
+                           Buffers: shared hit=4
+         ->  Hash  (cost=1.03..1.03 rows=3 width=34) (actual time=0.033..0.034 rows=3 loops=1)
+               Output: kt.tier_name, kt.daily_transaction_limit, kt.tier_level
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on public.kyc_tiers kt  (cost=0.00..1.03 rows=3 width=34) (actual time=0.014..0.017 rows=3 loops=1)
+                     Output: kt.tier_name, kt.daily_transaction_limit, kt.tier_level
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=155
+ Planning Time: 2.413 ms
+ Execution Time: 27.971 ms
+(57 rows)
+
+                                                                                                                   QUERY PLAN                                                                                                                   
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=17.91..17.92 rows=3 width=199) (actual time=0.214..0.221 rows=0 loops=1)
+   Output: a.account_number, ((((c.first_name)::text || ' '::text) || (c.last_name)::text)), c.email, (count(t.transaction_id)), (sum(t.amount)), (sum(t.fee)), (round(avg(t.amount), 2)), (max(t.created_at)), c.first_name, c.last_name
+   Buffers: shared hit=12
+   ->  Sort  (cost=17.91..17.92 rows=3 width=199) (actual time=0.213..0.219 rows=0 loops=1)
+         Output: a.account_number, ((((c.first_name)::text || ' '::text) || (c.last_name)::text)), c.email, (count(t.transaction_id)), (sum(t.amount)), (sum(t.fee)), (round(avg(t.amount), 2)), (max(t.created_at)), c.first_name, c.last_name
+         Sort Key: (sum(t.amount)) DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=12
+         ->  GroupAggregate  (cost=17.74..17.88 rows=3 width=199) (actual time=0.202..0.208 rows=0 loops=1)
+               Output: a.account_number, (((c.first_name)::text || ' '::text) || (c.last_name)::text), c.email, count(t.transaction_id), sum(t.amount), sum(t.fee), round(avg(t.amount), 2), max(t.created_at), c.first_name, c.last_name
+               Group Key: a.account_number, c.first_name, c.last_name, c.email
+               Buffers: shared hit=12
+               ->  Sort  (cost=17.74..17.75 rows=3 width=91) (actual time=0.201..0.205 rows=0 loops=1)
+                     Output: a.account_number, c.email, c.first_name, c.last_name, t.transaction_id, t.amount, t.fee, t.created_at
+                     Sort Key: a.account_number, c.first_name, c.last_name, c.email
+                     Sort Method: quicksort  Memory: 25kB
+                     Buffers: shared hit=12
+                     ->  Nested Loop  (cost=8.12..17.72 rows=3 width=91) (actual time=0.155..0.159 rows=0 loops=1)
+                           Output: a.account_number, c.email, c.first_name, c.last_name, t.transaction_id, t.amount, t.fee, t.created_at
+                           Inner Unique: true
+                           Buffers: shared hit=9
+                           ->  Hash Join  (cost=7.97..16.33 rows=3 width=63) (actual time=0.154..0.157 rows=0 loops=1)
+                                 Output: t.transaction_id, t.amount, t.fee, t.created_at, a.account_number, a.customer_id
+                                 Inner Unique: true
+                                 Hash Cond: (t.account_id = a.account_id)
+                                 Buffers: shared hit=9
+                                 ->  Index Scan using idx_transactions_created_at on public.transactions t  (cost=0.29..8.62 rows=8 width=52) (actual time=0.016..0.030 rows=17 loops=1)
+                                       Output: t.transaction_id, t.transaction_reference, t.account_id, t.transaction_type, t.category, t.amount, t.fee, t.balance_after, t.status, t.narration, t.created_at
+                                       Index Cond: (t.created_at >= '2026-05-31 23:00:00+00'::timestamp with time zone)
+                                       Filter: ((t.status)::text = 'SUCCESS'::text)
+                                       Rows Removed by Filter: 1
+                                       Buffers: shared hit=5
+                                 ->  Hash  (cost=6.69..6.69 rows=80 width=43) (actual time=0.107..0.108 rows=80 loops=1)
+                                       Output: a.account_number, a.account_id, a.customer_id
+                                       Buckets: 1024  Batches: 1  Memory Usage: 14kB
+                                       Buffers: shared hit=4
+                                       ->  Seq Scan on public.accounts a  (cost=0.00..6.69 rows=80 width=43) (actual time=0.008..0.059 rows=80 loops=1)
+                                             Output: a.account_number, a.account_id, a.customer_id
+                                             Filter: ((a.account_type)::text = 'MERCHANT_WALLET'::text)
+                                             Rows Removed by Filter: 135
+                                             Buffers: shared hit=4
+                           ->  Index Scan using customers_pkey on public.customers c  (cost=0.14..0.46 rows=1 width=60) (never executed)
+                                 Output: c.customer_id, c.first_name, c.last_name, c.email, c.phone_number, c.bvn_hash, c.nin_hash, c.kyc_tier, c.account_status, c.created_at, c.updated_at
+                                 Index Cond: (c.customer_id = a.customer_id)
+ Planning:
+   Buffers: shared hit=39
+ Planning Time: 0.835 ms
+ Execution Time: 0.357 ms
+(48 rows)
+

@@ -1,0 +1,464 @@
+    entity     | total_records 
+---------------+---------------
+ kyc_tiers     |             3
+ customers     |           102
+ accounts      |           215
+ beneficiaries |             5
+ transactions  |         15018
+ transfers     |          5009
+ fraud_alerts  |           352
+ audit_logs    |            14
+(8 rows)
+
+             customer_id              |     full_name     |  phone_number  |          tier_name           | daily_transaction_limit | account_number |  account_type   | available_balance | account_status 
+--------------------------------------+-------------------+----------------+------------------------------+-------------------------+----------------+-----------------+-------------------+----------------
+ 15b4e800-0429-492d-8483-87d4f13d621f | Abubakar Momodu   | +2348000000056 | Tier 2 - Verified Individual |               200000.00 | 1000000017     | SAVINGS         |       600641.1458 | ACTIVE
+ 15b4e800-0429-492d-8483-87d4f13d621f | Abubakar Momodu   | +2348000000056 | Tier 2 - Verified Individual |               200000.00 | 1000000018     | MERCHANT_WALLET |        19381.5450 | ACTIVE
+ 46fd6e28-ebf0-4b79-8ab6-7b145300167f | Abubakar Momodu   | +2348000000020 | Tier 3 - Premium Account     |              5000000.00 | 1000000049     | SAVINGS         |       634201.1900 | ACTIVE
+ 46fd6e28-ebf0-4b79-8ab6-7b145300167f | Abubakar Momodu   | +2348000000020 | Tier 3 - Premium Account     |              5000000.00 | 1000000050     | CURRENT         |       411724.3167 | ACTIVE
+ 8c6f5d12-388b-4268-9028-f2fc838a77b8 | Abubakar Momodu   | +2348000000092 | Tier 2 - Verified Individual |               200000.00 | 1000000099     | SAVINGS         |       557425.3065 | ACTIVE
+ 8c6f5d12-388b-4268-9028-f2fc838a77b8 | Abubakar Momodu   | +2348000000092 | Tier 2 - Verified Individual |               200000.00 | 1000000100     | MERCHANT_WALLET |       773643.6878 | ACTIVE
+ 9d810cb4-49d2-4efc-b942-5f60db5de45a | Abubakar Momodu   | +2348000000038 | Tier 2 - Verified Individual |               200000.00 | 1000000109     | SAVINGS         |       428819.2427 | ACTIVE
+ 9d810cb4-49d2-4efc-b942-5f60db5de45a | Abubakar Momodu   | +2348000000038 | Tier 2 - Verified Individual |               200000.00 | 1000000110     | MERCHANT_WALLET |       652906.6427 | ACTIVE
+ b829e932-e1d9-4683-ade5-6b125d03c061 | Abubakar Momodu   | +2348000000074 | Tier 2 - Verified Individual |               200000.00 | 1000000145     | SAVINGS         |       799252.6226 | ACTIVE
+ b829e932-e1d9-4683-ade5-6b125d03c061 | Abubakar Momodu   | +2348000000074 | Tier 2 - Verified Individual |               200000.00 | 1000000146     | MERCHANT_WALLET |       351573.4496 | ACTIVE
+ 3e05ef03-1af2-4473-ba1d-bfc71303cd71 | Adebayo Okafor    | +2348000000077 | Tier 1 - Basic Wallet        |                50000.00 | 1000000045     | SAVINGS         |       409900.8875 | ACTIVE
+ 3e05ef03-1af2-4473-ba1d-bfc71303cd71 | Adebayo Okafor    | +2348000000077 | Tier 1 - Basic Wallet        |                50000.00 | 1000000046     | MERCHANT_WALLET |       317069.8082 | ACTIVE
+ bc05670e-57a5-4e32-87cd-ab57e88fc7a7 | Adebayo Okafor    | +2348000000095 | Tier 3 - Premium Account     |              5000000.00 | 1000000147     | SAVINGS         |       332268.7035 | ACTIVE
+ bc05670e-57a5-4e32-87cd-ab57e88fc7a7 | Adebayo Okafor    | +2348000000095 | Tier 3 - Premium Account     |              5000000.00 | 1000000148     | CURRENT         |       502086.9220 | ACTIVE
+ d97a76d0-86f6-4cd4-8d14-34946d4e1aa8 | Adebayo Okafor    | +2348000000023 | Tier 1 - Basic Wallet        |                50000.00 | 1000000173     | SAVINGS         |       298620.0495 | ACTIVE
+ d97a76d0-86f6-4cd4-8d14-34946d4e1aa8 | Adebayo Okafor    | +2348000000023 | Tier 1 - Basic Wallet        |                50000.00 | 1000000174     | MERCHANT_WALLET |       549278.7555 | ACTIVE
+ fa35471d-3611-4264-9076-134745914114 | Adebayo Okafor    | +2348000000041 | Tier 1 - Basic Wallet        |                50000.00 | 1000000191     | SAVINGS         |       551658.5795 | ACTIVE
+ fa35471d-3611-4264-9076-134745914114 | Adebayo Okafor    | +2348000000041 | Tier 1 - Basic Wallet        |                50000.00 | 1000000192     | MERCHANT_WALLET |        80643.4110 | ACTIVE
+ feb0518b-8d2e-407e-a43c-cff6052fb2db | Adebayo Okafor    | +2348000000059 | Tier 1 - Basic Wallet        |                50000.00 | 1000000201     | SAVINGS         |       483515.1380 | ACTIVE
+ feb0518b-8d2e-407e-a43c-cff6052fb2db | Adebayo Okafor    | +2348000000059 | Tier 1 - Basic Wallet        |                50000.00 | 1000000202     | MERCHANT_WALLET |       796147.6675 | ACTIVE
+ a0000000-0000-0000-0000-000000000004 | Amina Yusuf       | +2348044567890 | Tier 1 - Basic Wallet        |                50000.00 | 0423456783     | SAVINGS         |        15000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000004 | Amina Yusuf       | +2348044567890 | Tier 1 - Basic Wallet        |                50000.00 | 1000000115     | SAVINGS         |       556162.3344 | ACTIVE
+ a0000000-0000-0000-0000-000000000004 | Amina Yusuf       | +2348044567890 | Tier 1 - Basic Wallet        |                50000.00 | 1000000116     | MERCHANT_WALLET |       735212.8686 | ACTIVE
+ a0000000-0000-0000-0000-000000000009 | Babatunde Adeleke | +2348099012345 | Tier 3 - Premium Account     |              5000000.00 | 0923456788     | CURRENT         |      1250000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000009 | Babatunde Adeleke | +2348099012345 | Tier 3 - Premium Account     |              5000000.00 | 1000000125     | SAVINGS         |       446396.9823 | ACTIVE
+ a0000000-0000-0000-0000-000000000009 | Babatunde Adeleke | +2348099012345 | Tier 3 - Premium Account     |              5000000.00 | 1000000126     | CURRENT         |       604026.0792 | ACTIVE
+ a0000000-0000-0000-0000-000000000008 | Chidinma Eze      | +2348088901234 | Tier 2 - Verified Individual |               200000.00 | 0823456787     | SAVINGS         |       110000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000008 | Chidinma Eze      | +2348088901234 | Tier 2 - Verified Individual |               200000.00 | 1000000123     | SAVINGS         |       103901.3790 | ACTIVE
+ a0000000-0000-0000-0000-000000000008 | Chidinma Eze      | +2348088901234 | Tier 2 - Verified Individual |               200000.00 | 1000000124     | MERCHANT_WALLET |        43428.3093 | ACTIVE
+ 082926ad-ffe8-411a-9085-65b5ab0ac90e | Chioma Suleiman   | +2348000000061 | Tier 1 - Basic Wallet        |                50000.00 | 1000000003     | SAVINGS         |       275611.1558 | ACTIVE
+ 082926ad-ffe8-411a-9085-65b5ab0ac90e | Chioma Suleiman   | +2348000000061 | Tier 1 - Basic Wallet        |                50000.00 | 1000000004     | MERCHANT_WALLET |       391741.3180 | ACTIVE
+ 6a015f93-0bfd-4b4f-9718-643748071d28 | Chioma Suleiman   | +2348000000043 | Tier 1 - Basic Wallet        |                50000.00 | 1000000083     | SAVINGS         |       621021.8836 | ACTIVE
+ 6a015f93-0bfd-4b4f-9718-643748071d28 | Chioma Suleiman   | +2348000000043 | Tier 1 - Basic Wallet        |                50000.00 | 1000000084     | MERCHANT_WALLET |       735928.1199 | ACTIVE
+ 6f36c83b-9cf9-4ba2-9d27-6132dd65630a | Chioma Suleiman   | +2348000000025 | Tier 3 - Premium Account     |              5000000.00 | 1000000087     | SAVINGS         |       109820.0315 | ACTIVE
+ 6f36c83b-9cf9-4ba2-9d27-6132dd65630a | Chioma Suleiman   | +2348000000025 | Tier 3 - Premium Account     |              5000000.00 | 1000000088     | CURRENT         |         6400.8863 | ACTIVE
+ a9cb7ed2-b8db-4935-a3d8-9ea9ee53829d | Chioma Suleiman   | +2348000000079 | Tier 1 - Basic Wallet        |                50000.00 | 1000000137     | SAVINGS         |       394460.9631 | ACTIVE
+ a9cb7ed2-b8db-4935-a3d8-9ea9ee53829d | Chioma Suleiman   | +2348000000079 | Tier 1 - Basic Wallet        |                50000.00 | 1000000138     | MERCHANT_WALLET |       271781.2379 | ACTIVE
+ fc260ace-d69f-49bf-bfc5-9d098734b150 | Chioma Suleiman   | +2348000000097 | Tier 1 - Basic Wallet        |                50000.00 | 1000000193     | SAVINGS         |       152708.9852 | ACTIVE
+ fc260ace-d69f-49bf-bfc5-9d098734b150 | Chioma Suleiman   | +2348000000097 | Tier 1 - Basic Wallet        |                50000.00 | 1000000194     | MERCHANT_WALLET |        64475.0854 | ACTIVE
+ 08d7ebcd-8c1c-4974-b402-cd72b5f94460 | Chukwudi Aliyu    | +2348000000069 | Tier 1 - Basic Wallet        |                50000.00 | 1000000005     | SAVINGS         |       411440.2830 | ACTIVE
+ 08d7ebcd-8c1c-4974-b402-cd72b5f94460 | Chukwudi Aliyu    | +2348000000069 | Tier 1 - Basic Wallet        |                50000.00 | 1000000006     | MERCHANT_WALLET |       201775.6688 | ACTIVE
+ 1614a5b4-c9d3-447d-91d4-ea1303dcd754 | Chukwudi Aliyu    | +2348000000015 | Tier 3 - Premium Account     |              5000000.00 | 1000000019     | SAVINGS         |       845443.9663 | ACTIVE
+ 1614a5b4-c9d3-447d-91d4-ea1303dcd754 | Chukwudi Aliyu    | +2348000000015 | Tier 3 - Premium Account     |              5000000.00 | 1000000020     | CURRENT         |       553088.8239 | ACTIVE
+ 9c490cf8-cfaa-4caf-afe1-c4d756702bb4 | Chukwudi Aliyu    | +2348000000033 | Tier 1 - Basic Wallet        |                50000.00 | 1000000103     | SAVINGS         |       785337.3512 | ACTIVE
+ 9c490cf8-cfaa-4caf-afe1-c4d756702bb4 | Chukwudi Aliyu    | +2348000000033 | Tier 1 - Basic Wallet        |                50000.00 | 1000000104     | MERCHANT_WALLET |       396125.4280 | ACTIVE
+ d45c6c67-4864-4ce5-924d-252bd43464ce | Chukwudi Aliyu    | +2348000000051 | Tier 1 - Basic Wallet        |                50000.00 | 1000000163     | SAVINGS         |       104094.1285 | ACTIVE
+ d45c6c67-4864-4ce5-924d-252bd43464ce | Chukwudi Aliyu    | +2348000000051 | Tier 1 - Basic Wallet        |                50000.00 | 1000000164     | MERCHANT_WALLET |       782584.5849 | ACTIVE
+ fe64aed8-68fb-42f2-91e9-d46be0ead91c | Chukwudi Aliyu    | +2348000000087 | Tier 1 - Basic Wallet        |                50000.00 | 1000000199     | SAVINGS         |       566137.4004 | ACTIVE
+ fe64aed8-68fb-42f2-91e9-d46be0ead91c | Chukwudi Aliyu    | +2348000000087 | Tier 1 - Basic Wallet        |                50000.00 | 1000000200     | MERCHANT_WALLET |       611379.2982 | ACTIVE
+ 241e0a0b-1c1c-4607-8769-0d5284d6dc0a | Damilola Okonkwo  | +2348000000029 | Tier 1 - Basic Wallet        |                50000.00 | 1000000025     | SAVINGS         |       356910.0848 | ACTIVE
+ 241e0a0b-1c1c-4607-8769-0d5284d6dc0a | Damilola Okonkwo  | +2348000000029 | Tier 1 - Basic Wallet        |                50000.00 | 1000000026     | MERCHANT_WALLET |        89776.2607 | ACTIVE
+ 252450a5-c3ba-48fc-a28e-e3c07d731e39 | Damilola Okonkwo  | +2348000000083 | Tier 1 - Basic Wallet        |                50000.00 | 1000000027     | SAVINGS         |       252479.9608 | ACTIVE
+ 252450a5-c3ba-48fc-a28e-e3c07d731e39 | Damilola Okonkwo  | +2348000000083 | Tier 1 - Basic Wallet        |                50000.00 | 1000000028     | MERCHANT_WALLET |       253963.2720 | ACTIVE
+ 26c55fec-b28b-45d9-b079-66f2371549b8 | Damilola Okonkwo  | +2348000000065 | Tier 3 - Premium Account     |              5000000.00 | 1000000031     | SAVINGS         |       136492.6587 | ACTIVE
+ 26c55fec-b28b-45d9-b079-66f2371549b8 | Damilola Okonkwo  | +2348000000065 | Tier 3 - Premium Account     |              5000000.00 | 1000000032     | CURRENT         |       696434.8117 | ACTIVE
+ 4ee1fd10-5d53-4bd9-987a-12d2bf055832 | Damilola Okonkwo  | +2348000000047 | Tier 1 - Basic Wallet        |                50000.00 | 1000000057     | SAVINGS         |       824505.9379 | ACTIVE
+ 4ee1fd10-5d53-4bd9-987a-12d2bf055832 | Damilola Okonkwo  | +2348000000047 | Tier 1 - Basic Wallet        |                50000.00 | 1000000058     | MERCHANT_WALLET |       684356.2044 | ACTIVE
+ ca9cee39-c863-494b-9749-fcbbca51694f | Damilola Okonkwo  | +2348000000101 | Tier 1 - Basic Wallet        |                50000.00 | 1000000155     | SAVINGS         |       687252.2321 | ACTIVE
+ ca9cee39-c863-494b-9749-fcbbca51694f | Damilola Okonkwo  | +2348000000101 | Tier 1 - Basic Wallet        |                50000.00 | 1000000156     | MERCHANT_WALLET |       441540.1226 | ACTIVE
+ a0000000-0000-0000-0000-000000000003 | David Bello       | +2348033456789 | Tier 3 - Premium Account     |              5000000.00 | 0323456782     | CURRENT         |        80000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000003 | David Bello       | +2348033456789 | Tier 3 - Premium Account     |              5000000.00 | 1000000113     | SAVINGS         |       836107.0171 | ACTIVE
+ a0000000-0000-0000-0000-000000000003 | David Bello       | +2348033456789 | Tier 3 - Premium Account     |              5000000.00 | 1000000114     | CURRENT         |       464081.7002 | ACTIVE
+ a0000000-0000-0000-0000-000000000005 | Emeka Nwosu       | +2348055678901 | Tier 2 - Verified Individual |               200000.00 | 0523456784     | SAVINGS         |        75000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000005 | Emeka Nwosu       | +2348055678901 | Tier 2 - Verified Individual |               200000.00 | 1000000117     | SAVINGS         |       223715.7600 | ACTIVE
+ a0000000-0000-0000-0000-000000000005 | Emeka Nwosu       | +2348055678901 | Tier 2 - Verified Individual |               200000.00 | 1000000118     | MERCHANT_WALLET |       335631.9312 | ACTIVE
+ 4cff9bf8-1a08-4a25-9fa4-3f1ef9a93f8b | Fatima Eze        | +2348000000072 | Tier 2 - Verified Individual |               200000.00 | 1000000053     | SAVINGS         |       245900.6021 | ACTIVE
+ 4cff9bf8-1a08-4a25-9fa4-3f1ef9a93f8b | Fatima Eze        | +2348000000072 | Tier 2 - Verified Individual |               200000.00 | 1000000054     | MERCHANT_WALLET |       513570.4339 | ACTIVE
+ 4f23310e-b988-415f-80e0-32dff8cb72b5 | Fatima Eze        | +2348000000054 | Tier 2 - Verified Individual |               200000.00 | 1000000059     | SAVINGS         |       209897.6443 | ACTIVE
+ 4f23310e-b988-415f-80e0-32dff8cb72b5 | Fatima Eze        | +2348000000054 | Tier 2 - Verified Individual |               200000.00 | 1000000060     | MERCHANT_WALLET |       469707.8602 | ACTIVE
+ 806a1243-8fe4-440c-aa14-d421cd0b2923 | Fatima Eze        | +2348000000090 | Tier 3 - Premium Account     |              5000000.00 | 1000000093     | SAVINGS         |       534236.8930 | ACTIVE
+ 806a1243-8fe4-440c-aa14-d421cd0b2923 | Fatima Eze        | +2348000000090 | Tier 3 - Premium Account     |              5000000.00 | 1000000094     | CURRENT         |         9574.0980 | ACTIVE
+ 811cce53-bb13-407e-89dc-e686a06c9ffe | Fatima Eze        | +2348000000036 | Tier 2 - Verified Individual |               200000.00 | 1000000095     | SAVINGS         |       119560.2963 | ACTIVE
+ 811cce53-bb13-407e-89dc-e686a06c9ffe | Fatima Eze        | +2348000000036 | Tier 2 - Verified Individual |               200000.00 | 1000000096     | MERCHANT_WALLET |       177679.1225 | ACTIVE
+ c77ff771-e423-4db5-be42-1cee84f6fdfd | Fatima Eze        | +2348000000018 | Tier 2 - Verified Individual |               200000.00 | 1000000153     | SAVINGS         |       597209.7353 | ACTIVE
+ c77ff771-e423-4db5-be42-1cee84f6fdfd | Fatima Eze        | +2348000000018 | Tier 2 - Verified Individual |               200000.00 | 1000000154     | MERCHANT_WALLET |       154627.8786 | ACTIVE
+ a0000000-0000-0000-0000-000000000006 | Folake Balogun    | +2348066789012 | Tier 3 - Premium Account     |              5000000.00 | 0623456785     | CURRENT         |       620000.0000 | ACTIVE
+ 39fb5770-999a-45f6-9e27-b08035dbd2cb | Folake Balogun    | +2348000000070 | Tier 3 - Premium Account     |              5000000.00 | 1000000039     | SAVINGS         |       118157.9995 | ACTIVE
+ 39fb5770-999a-45f6-9e27-b08035dbd2cb | Folake Balogun    | +2348000000070 | Tier 3 - Premium Account     |              5000000.00 | 1000000040     | CURRENT         |       712568.5201 | ACTIVE
+ 4668dd28-5312-4166-82a7-ceb1e05421b7 | Folake Balogun    | +2348000000016 | Tier 2 - Verified Individual |               200000.00 | 1000000047     | SAVINGS         |       566177.1659 | ACTIVE
+ 4668dd28-5312-4166-82a7-ceb1e05421b7 | Folake Balogun    | +2348000000016 | Tier 2 - Verified Individual |               200000.00 | 1000000048     | MERCHANT_WALLET |       234997.1756 | ACTIVE
+ a0000000-0000-0000-0000-000000000006 | Folake Balogun    | +2348066789012 | Tier 3 - Premium Account     |              5000000.00 | 1000000119     | SAVINGS         |       191893.3206 | ACTIVE
+ a0000000-0000-0000-0000-000000000006 | Folake Balogun    | +2348066789012 | Tier 3 - Premium Account     |              5000000.00 | 1000000120     | CURRENT         |       120057.7895 | ACTIVE
+ ab20b342-afc5-401c-a4da-53f2a606a1c1 | Folake Balogun    | +2348000000052 | Tier 2 - Verified Individual |               200000.00 | 1000000139     | SAVINGS         |       786405.7438 | ACTIVE
+ ab20b342-afc5-401c-a4da-53f2a606a1c1 | Folake Balogun    | +2348000000052 | Tier 2 - Verified Individual |               200000.00 | 1000000140     | MERCHANT_WALLET |        94125.9750 | ACTIVE
+ c12ae5e1-a9e4-49f6-be26-74576611aeac | Folake Balogun    | +2348000000088 | Tier 2 - Verified Individual |               200000.00 | 1000000151     | SAVINGS         |       349582.4474 | ACTIVE
+ c12ae5e1-a9e4-49f6-be26-74576611aeac | Folake Balogun    | +2348000000088 | Tier 2 - Verified Individual |               200000.00 | 1000000152     | MERCHANT_WALLET |       646097.3710 | ACTIVE
+ fdcc6a54-fe9b-420d-81e3-8030c4939022 | Folake Balogun    | +2348000000034 | Tier 2 - Verified Individual |               200000.00 | 1000000197     | SAVINGS         |       711510.8893 | ACTIVE
+ fdcc6a54-fe9b-420d-81e3-8030c4939022 | Folake Balogun    | +2348000000034 | Tier 2 - Verified Individual |               200000.00 | 1000000198     | MERCHANT_WALLET |        65444.7518 | ACTIVE
+ a0000000-0000-0000-0000-000000000010 | Halima Garba      | +2348019876543 | Tier 2 - Verified Individual |               200000.00 | 0113456789     | SAVINGS         |        45000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000010 | Halima Garba      | +2348019876543 | Tier 2 - Verified Individual |               200000.00 | 1000000127     | SAVINGS         |        76117.7967 | ACTIVE
+ a0000000-0000-0000-0000-000000000010 | Halima Garba      | +2348019876543 | Tier 2 - Verified Individual |               200000.00 | 1000000128     | MERCHANT_WALLET |       197750.2020 | ACTIVE
+ a0000000-0000-0000-0000-000000000007 | Ibrahim Danjuma   | +2348077890123 | Tier 1 - Basic Wallet        |                50000.00 | 0723456786     | SAVINGS         |         8500.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000007 | Ibrahim Danjuma   | +2348077890123 | Tier 1 - Basic Wallet        |                50000.00 | 1000000121     | SAVINGS         |       221771.9545 | ACTIVE
+ a0000000-0000-0000-0000-000000000007 | Ibrahim Danjuma   | +2348077890123 | Tier 1 - Basic Wallet        |                50000.00 | 1000000122     | MERCHANT_WALLET |        76105.1591 | ACTIVE
+ a0000000-0000-0000-0000-000000000001 | John Adeyemi      | +2348011234567 | Tier 3 - Premium Account     |              5000000.00 | 0123456789     | SAVINGS         |       119000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000001 | John Adeyemi      | +2348011234567 | Tier 3 - Premium Account     |              5000000.00 | 0123456790     | CURRENT         |       450000.0000 | ACTIVE
+ 60a1d514-0613-42dc-aa22-2e15f768bd9a | Kayode Nwachukwu  | +2348000000102 | Tier 2 - Verified Individual |               200000.00 | 1000000071     | SAVINGS         |       843236.4245 | ACTIVE
+ 60a1d514-0613-42dc-aa22-2e15f768bd9a | Kayode Nwachukwu  | +2348000000102 | Tier 2 - Verified Individual |               200000.00 | 1000000072     | MERCHANT_WALLET |       652112.7013 | ACTIVE
+ 9d68c3ab-a1ed-4011-9d23-7904b9144b03 | Kayode Nwachukwu  | +2348000000066 | Tier 2 - Verified Individual |               200000.00 | 1000000107     | SAVINGS         |       518017.3368 | ACTIVE
+ 9d68c3ab-a1ed-4011-9d23-7904b9144b03 | Kayode Nwachukwu  | +2348000000066 | Tier 2 - Verified Individual |               200000.00 | 1000000108     | MERCHANT_WALLET |       318779.8354 | ACTIVE
+ b5d1029f-c797-445a-abdb-f4e91788c63c | Kayode Nwachukwu  | +2348000000084 | Tier 2 - Verified Individual |               200000.00 | 1000000143     | SAVINGS         |       596857.9192 | ACTIVE
+ b5d1029f-c797-445a-abdb-f4e91788c63c | Kayode Nwachukwu  | +2348000000084 | Tier 2 - Verified Individual |               200000.00 | 1000000144     | MERCHANT_WALLET |       456578.6379 | ACTIVE
+ d24af1f0-5402-427c-98f2-36ed51e02c1c | Kayode Nwachukwu  | +2348000000048 | Tier 2 - Verified Individual |               200000.00 | 1000000161     | SAVINGS         |       334444.6485 | ACTIVE
+ d24af1f0-5402-427c-98f2-36ed51e02c1c | Kayode Nwachukwu  | +2348000000048 | Tier 2 - Verified Individual |               200000.00 | 1000000162     | MERCHANT_WALLET |       369471.2077 | ACTIVE
+ d53951eb-bfff-4fc9-bcde-b93001c2ebab | Kayode Nwachukwu  | +2348000000030 | Tier 3 - Premium Account     |              5000000.00 | 1000000165     | SAVINGS         |         5146.6914 | ACTIVE
+ d53951eb-bfff-4fc9-bcde-b93001c2ebab | Kayode Nwachukwu  | +2348000000030 | Tier 3 - Premium Account     |              5000000.00 | 1000000166     | CURRENT         |        22478.0185 | ACTIVE
+ 10f25bc9-55c2-4189-a46a-7b6aacab41a6 | Kelechi Adeleke   | +2348000000080 | Tier 3 - Premium Account     |              5000000.00 | 1000000011     | SAVINGS         |        41010.3727 | ACTIVE
+ 10f25bc9-55c2-4189-a46a-7b6aacab41a6 | Kelechi Adeleke   | +2348000000080 | Tier 3 - Premium Account     |              5000000.00 | 1000000012     | CURRENT         |       730182.1266 | ACTIVE
+ 291bad09-b0ba-4485-9cdd-536826108d3a | Kelechi Adeleke   | +2348000000044 | Tier 2 - Verified Individual |               200000.00 | 1000000033     | SAVINGS         |        87831.7725 | ACTIVE
+ 291bad09-b0ba-4485-9cdd-536826108d3a | Kelechi Adeleke   | +2348000000044 | Tier 2 - Verified Individual |               200000.00 | 1000000034     | MERCHANT_WALLET |        48323.9356 | ACTIVE
+ 33505cb2-5e88-4a04-b61d-0f90b8604278 | Kelechi Adeleke   | +2348000000026 | Tier 2 - Verified Individual |               200000.00 | 1000000037     | SAVINGS         |        77612.9793 | ACTIVE
+ 33505cb2-5e88-4a04-b61d-0f90b8604278 | Kelechi Adeleke   | +2348000000026 | Tier 2 - Verified Individual |               200000.00 | 1000000038     | MERCHANT_WALLET |       209045.3299 | ACTIVE
+ 6b1d9c53-be62-4ad5-aae8-afe2b5ac6b0e | Kelechi Adeleke   | +2348000000062 | Tier 2 - Verified Individual |               200000.00 | 1000000085     | SAVINGS         |        53411.6235 | ACTIVE
+ 6b1d9c53-be62-4ad5-aae8-afe2b5ac6b0e | Kelechi Adeleke   | +2348000000062 | Tier 2 - Verified Individual |               200000.00 | 1000000086     | MERCHANT_WALLET |       358530.1788 | ACTIVE
+ ec1a065b-7cfe-4328-b01f-a72cecc496ef | Kelechi Adeleke   | +2348000000098 | Tier 2 - Verified Individual |               200000.00 | 1000000179     | SAVINGS         |       485497.5342 | ACTIVE
+ ec1a065b-7cfe-4328-b01f-a72cecc496ef | Kelechi Adeleke   | +2348000000098 | Tier 2 - Verified Individual |               200000.00 | 1000000180     | MERCHANT_WALLET |       119187.4192 | ACTIVE
+ 1fb81e7f-b704-48ec-a6bd-871a02970fe6 | Mustapha Ogundipe | +2348000000094 | Tier 2 - Verified Individual |               200000.00 | 1000000023     | SAVINGS         |       314749.1530 | ACTIVE
+ 1fb81e7f-b704-48ec-a6bd-871a02970fe6 | Mustapha Ogundipe | +2348000000094 | Tier 2 - Verified Individual |               200000.00 | 1000000024     | MERCHANT_WALLET |        47544.5204 | ACTIVE
+ 60fabb25-068c-45d3-b9f4-fb050207a911 | Mustapha Ogundipe | +2348000000076 | Tier 2 - Verified Individual |               200000.00 | 1000000073     | SAVINGS         |       583799.1053 | ACTIVE
+ 60fabb25-068c-45d3-b9f4-fb050207a911 | Mustapha Ogundipe | +2348000000076 | Tier 2 - Verified Individual |               200000.00 | 1000000074     | MERCHANT_WALLET |       558902.7249 | ACTIVE
+ 67e8b5d1-5216-4106-827b-03bb535e5f52 | Mustapha Ogundipe | +2348000000040 | Tier 3 - Premium Account     |              5000000.00 | 1000000077     | SAVINGS         |       162030.4472 | ACTIVE
+ 67e8b5d1-5216-4106-827b-03bb535e5f52 | Mustapha Ogundipe | +2348000000040 | Tier 3 - Premium Account     |              5000000.00 | 1000000078     | CURRENT         |       198515.5636 | ACTIVE
+ a57c6b4a-708e-4084-b85e-3b08965a0b10 | Mustapha Ogundipe | +2348000000058 | Tier 2 - Verified Individual |               200000.00 | 1000000133     | SAVINGS         |       415056.5581 | ACTIVE
+ a57c6b4a-708e-4084-b85e-3b08965a0b10 | Mustapha Ogundipe | +2348000000058 | Tier 2 - Verified Individual |               200000.00 | 1000000134     | MERCHANT_WALLET |       468872.4660 | ACTIVE
+ aeab2654-070c-4ba7-8f12-4b85b322eb6e | Mustapha Ogundipe | +2348000000022 | Tier 2 - Verified Individual |               200000.00 | 1000000141     | SAVINGS         |       244705.8944 | ACTIVE
+ aeab2654-070c-4ba7-8f12-4b85b322eb6e | Mustapha Ogundipe | +2348000000022 | Tier 2 - Verified Individual |               200000.00 | 1000000142     | MERCHANT_WALLET |       589937.4350 | ACTIVE
+ a0000000-0000-0000-0000-000000000012 | Ngozi Okonjo      | +2348037654321 | Tier 3 - Premium Account     |              5000000.00 | 0123556789     | MERCHANT_WALLET |      5800000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000012 | Ngozi Okonjo      | +2348037654321 | Tier 3 - Premium Account     |              5000000.00 | 1000000131     | SAVINGS         |       337489.4692 | ACTIVE
+ a0000000-0000-0000-0000-000000000012 | Ngozi Okonjo      | +2348037654321 | Tier 3 - Premium Account     |              5000000.00 | 1000000132     | CURRENT         |       200501.3299 | ACTIVE
+ 16272566-4dbd-4820-9907-c145c4c36916 | Nnamdi Danjuma    | +2348000000021 | Tier 1 - Basic Wallet        |                50000.00 | 1000000021     | SAVINGS         |       250024.5063 | ACTIVE
+ 16272566-4dbd-4820-9907-c145c4c36916 | Nnamdi Danjuma    | +2348000000021 | Tier 1 - Basic Wallet        |                50000.00 | 1000000022     | MERCHANT_WALLET |       786226.4670 | ACTIVE
+ 83021738-0853-4bbb-9c1b-ed5cec2a301d | Nnamdi Danjuma    | +2348000000057 | Tier 1 - Basic Wallet        |                50000.00 | 1000000097     | SAVINGS         |       621086.9231 | ACTIVE
+ 83021738-0853-4bbb-9c1b-ed5cec2a301d | Nnamdi Danjuma    | +2348000000057 | Tier 1 - Basic Wallet        |                50000.00 | 1000000098     | MERCHANT_WALLET |       158535.1299 | ACTIVE
+ dd36729e-088e-4489-8ce4-744266ca58cc | Nnamdi Danjuma    | +2348000000039 | Tier 1 - Basic Wallet        |                50000.00 | 1000000175     | SAVINGS         |       213380.6341 | ACTIVE
+ dd36729e-088e-4489-8ce4-744266ca58cc | Nnamdi Danjuma    | +2348000000039 | Tier 1 - Basic Wallet        |                50000.00 | 1000000176     | MERCHANT_WALLET |       635783.9470 | ACTIVE
+ f292491c-5fd1-4f3d-af18-7ffbd6a621e4 | Nnamdi Danjuma    | +2348000000093 | Tier 1 - Basic Wallet        |                50000.00 | 1000000183     | SAVINGS         |       806239.7157 | ACTIVE
+ f292491c-5fd1-4f3d-af18-7ffbd6a621e4 | Nnamdi Danjuma    | +2348000000093 | Tier 1 - Basic Wallet        |                50000.00 | 1000000184     | MERCHANT_WALLET |       777303.7777 | ACTIVE
+ fd226cd5-aa11-4f86-8ea5-5d10c2494936 | Nnamdi Danjuma    | +2348000000075 | Tier 3 - Premium Account     |              5000000.00 | 1000000195     | SAVINGS         |       375846.6362 | ACTIVE
+ fd226cd5-aa11-4f86-8ea5-5d10c2494936 | Nnamdi Danjuma    | +2348000000075 | Tier 3 - Premium Account     |              5000000.00 | 1000000196     | CURRENT         |       369260.8702 | ACTIVE
+ a0000000-0000-0000-0000-000000000011 | Olumide Fashola   | +2348028765432 | Tier 1 - Basic Wallet        |                50000.00 | 0124456789     | SAVINGS         |        12000.0000 | FROZEN_PND
+ 0dbfdc4f-e3c8-45c5-ae9d-cfaae4de1792 | Olumide Yusuf     | +2348000000046 | Tier 2 - Verified Individual |               200000.00 | 1000000009     | SAVINGS         |       396711.1830 | ACTIVE
+ 0dbfdc4f-e3c8-45c5-ae9d-cfaae4de1792 | Olumide Yusuf     | +2348000000046 | Tier 2 - Verified Individual |               200000.00 | 1000000010     | MERCHANT_WALLET |       410344.4840 | ACTIVE
+ 5d3a6e65-f6ba-4bd1-84d0-6c1441796f8e | Olumide Yusuf     | +2348000000064 | Tier 2 - Verified Individual |               200000.00 | 1000000069     | SAVINGS         |       714808.6126 | ACTIVE
+ 5d3a6e65-f6ba-4bd1-84d0-6c1441796f8e | Olumide Yusuf     | +2348000000064 | Tier 2 - Verified Individual |               200000.00 | 1000000070     | MERCHANT_WALLET |        58524.9190 | ACTIVE
+ a0000000-0000-0000-0000-000000000011 | Olumide Fashola   | +2348028765432 | Tier 1 - Basic Wallet        |                50000.00 | 1000000129     | SAVINGS         |       297605.0895 | ACTIVE
+ a0000000-0000-0000-0000-000000000011 | Olumide Fashola   | +2348028765432 | Tier 1 - Basic Wallet        |                50000.00 | 1000000130     | MERCHANT_WALLET |       442782.4074 | ACTIVE
+ a698debb-4fde-4812-a76b-b0e1af14c79d | Olumide Yusuf     | +2348000000100 | Tier 3 - Premium Account     |              5000000.00 | 1000000135     | SAVINGS         |       651790.5732 | ACTIVE
+ a698debb-4fde-4812-a76b-b0e1af14c79d | Olumide Yusuf     | +2348000000100 | Tier 3 - Premium Account     |              5000000.00 | 1000000136     | CURRENT         |       581495.1776 | ACTIVE
+ d7243381-d2ca-4547-b07e-8a1329afb026 | Olumide Yusuf     | +2348000000028 | Tier 2 - Verified Individual |               200000.00 | 1000000171     | SAVINGS         |       507492.0698 | ACTIVE
+ d7243381-d2ca-4547-b07e-8a1329afb026 | Olumide Yusuf     | +2348000000028 | Tier 2 - Verified Individual |               200000.00 | 1000000172     | MERCHANT_WALLET |       228181.2354 | ACTIVE
+ f5a21241-b09b-4ffc-8f40-6d5532bd23cf | Olumide Yusuf     | +2348000000082 | Tier 2 - Verified Individual |               200000.00 | 1000000189     | SAVINGS         |       834164.7981 | ACTIVE
+ f5a21241-b09b-4ffc-8f40-6d5532bd23cf | Olumide Yusuf     | +2348000000082 | Tier 2 - Verified Individual |               200000.00 | 1000000190     | MERCHANT_WALLET |       139973.7722 | ACTIVE
+ 1193e1ee-727c-4f0d-bf27-2abd96c0ec45 | Onyinye Nwankwo   | +2348000000045 | Tier 3 - Premium Account     |              5000000.00 | 1000000013     | SAVINGS         |       129104.0844 | ACTIVE
+ 1193e1ee-727c-4f0d-bf27-2abd96c0ec45 | Onyinye Nwankwo   | +2348000000045 | Tier 3 - Premium Account     |              5000000.00 | 1000000014     | CURRENT         |       785203.1470 | ACTIVE
+ 3140b18f-f846-455e-9822-434aab1a228b | Onyinye Nwankwo   | +2348000000063 | Tier 1 - Basic Wallet        |                50000.00 | 1000000035     | SAVINGS         |        65995.4359 | ACTIVE
+ 3140b18f-f846-455e-9822-434aab1a228b | Onyinye Nwankwo   | +2348000000063 | Tier 1 - Basic Wallet        |                50000.00 | 1000000036     | MERCHANT_WALLET |       488653.7992 | ACTIVE
+ 50278b6d-ae07-4fc7-affe-e5d8b9c20c4a | Onyinye Nwankwo   | +2348000000099 | Tier 1 - Basic Wallet        |                50000.00 | 1000000063     | SAVINGS         |       323908.7989 | ACTIVE
+ 50278b6d-ae07-4fc7-affe-e5d8b9c20c4a | Onyinye Nwankwo   | +2348000000099 | Tier 1 - Basic Wallet        |                50000.00 | 1000000064     | MERCHANT_WALLET |       785596.5728 | ACTIVE
+ 79ba6511-aa03-4d6a-bd19-4d5f75177eaf | Onyinye Nwankwo   | +2348000000081 | Tier 1 - Basic Wallet        |                50000.00 | 1000000091     | SAVINGS         |       773040.5458 | ACTIVE
+ 79ba6511-aa03-4d6a-bd19-4d5f75177eaf | Onyinye Nwankwo   | +2348000000081 | Tier 1 - Basic Wallet        |                50000.00 | 1000000092     | MERCHANT_WALLET |       661880.9484 | ACTIVE
+ d18baa49-d00a-4c06-99e8-74d292872d44 | Onyinye Nwankwo   | +2348000000027 | Tier 1 - Basic Wallet        |                50000.00 | 1000000157     | SAVINGS         |       774001.7527 | ACTIVE
+ d18baa49-d00a-4c06-99e8-74d292872d44 | Onyinye Nwankwo   | +2348000000027 | Tier 1 - Basic Wallet        |                50000.00 | 1000000158     | MERCHANT_WALLET |       500063.6145 | ACTIVE
+ a0000000-0000-0000-0000-000000000002 | Sarah Okafor      | +2348022345678 | Tier 2 - Verified Individual |               200000.00 | 0223456781     | SAVINGS         |       266000.0000 | ACTIVE
+ a0000000-0000-0000-0000-000000000002 | Sarah Okafor      | +2348022345678 | Tier 2 - Verified Individual |               200000.00 | 1000000111     | SAVINGS         |       188254.6145 | ACTIVE
+ a0000000-0000-0000-0000-000000000002 | Sarah Okafor      | +2348022345678 | Tier 2 - Verified Individual |               200000.00 | 1000000112     | MERCHANT_WALLET |       433281.9861 | ACTIVE
+ 15066c71-cdd8-4c38-b439-7d2bee50dd65 | Simisola Garba    | +2348000000032 | Tier 2 - Verified Individual |               200000.00 | 1000000015     | SAVINGS         |       237715.1412 | ACTIVE
+ 15066c71-cdd8-4c38-b439-7d2bee50dd65 | Simisola Garba    | +2348000000032 | Tier 2 - Verified Individual |               200000.00 | 1000000016     | MERCHANT_WALLET |       224344.3253 | ACTIVE
+ 3ccce609-8bc1-4a57-88c4-4e2477cf0563 | Simisola Garba    | +2348000000014 | Tier 2 - Verified Individual |               200000.00 | 1000000041     | SAVINGS         |       761818.1632 | ACTIVE
+ 3ccce609-8bc1-4a57-88c4-4e2477cf0563 | Simisola Garba    | +2348000000014 | Tier 2 - Verified Individual |               200000.00 | 1000000042     | MERCHANT_WALLET |       726298.8376 | ACTIVE
+ 5a62950a-f0fb-44b7-8aff-e8b52bb80a66 | Simisola Garba    | +2348000000086 | Tier 2 - Verified Individual |               200000.00 | 1000000067     | SAVINGS         |        73370.5092 | ACTIVE
+ 5a62950a-f0fb-44b7-8aff-e8b52bb80a66 | Simisola Garba    | +2348000000086 | Tier 2 - Verified Individual |               200000.00 | 1000000068     | MERCHANT_WALLET |       559554.5361 | ACTIVE
+ 69c793a0-88b4-4f7f-a004-e54d8817d4b4 | Simisola Garba    | +2348000000068 | Tier 2 - Verified Individual |               200000.00 | 1000000079     | SAVINGS         |       699093.5220 | ACTIVE
+ 69c793a0-88b4-4f7f-a004-e54d8817d4b4 | Simisola Garba    | +2348000000068 | Tier 2 - Verified Individual |               200000.00 | 1000000080     | MERCHANT_WALLET |       471580.0990 | ACTIVE
+ d6559b2c-3394-4340-96d5-3da6392b3a2a | Simisola Garba    | +2348000000050 | Tier 3 - Premium Account     |              5000000.00 | 1000000169     | SAVINGS         |       414014.8563 | ACTIVE
+ d6559b2c-3394-4340-96d5-3da6392b3a2a | Simisola Garba    | +2348000000050 | Tier 3 - Premium Account     |              5000000.00 | 1000000170     | CURRENT         |       787054.4534 | ACTIVE
+ 3cd91fbb-537f-4fda-a139-714b864b3830 | Tariq Bello       | +2348000000019 | Tier 1 - Basic Wallet        |                50000.00 | 1000000043     | SAVINGS         |       639752.6793 | ACTIVE
+ 3cd91fbb-537f-4fda-a139-714b864b3830 | Tariq Bello       | +2348000000019 | Tier 1 - Basic Wallet        |                50000.00 | 1000000044     | MERCHANT_WALLET |       405487.3352 | ACTIVE
+ 4abfdae2-8ea5-4447-93cb-fe63da6a8269 | Tariq Bello       | +2348000000073 | Tier 1 - Basic Wallet        |                50000.00 | 1000000051     | SAVINGS         |       710733.5780 | ACTIVE
+ 4abfdae2-8ea5-4447-93cb-fe63da6a8269 | Tariq Bello       | +2348000000073 | Tier 1 - Basic Wallet        |                50000.00 | 1000000052     | MERCHANT_WALLET |       145160.4822 | ACTIVE
+ 4f75388d-b88c-40e0-88fd-013955288877 | Tariq Bello       | +2348000000091 | Tier 1 - Basic Wallet        |                50000.00 | 1000000061     | SAVINGS         |       525874.4937 | ACTIVE
+ 4f75388d-b88c-40e0-88fd-013955288877 | Tariq Bello       | +2348000000091 | Tier 1 - Basic Wallet        |                50000.00 | 1000000062     | MERCHANT_WALLET |       469807.6413 | ACTIVE
+ 69eb21ed-6e9c-465a-94aa-e6300cae9cfd | Tariq Bello       | +2348000000055 | Tier 3 - Premium Account     |              5000000.00 | 1000000081     | SAVINGS         |       557822.8394 | ACTIVE
+ 69eb21ed-6e9c-465a-94aa-e6300cae9cfd | Tariq Bello       | +2348000000055 | Tier 3 - Premium Account     |              5000000.00 | 1000000082     | CURRENT         |       743867.1094 | ACTIVE
+ e3622ece-67be-471d-8a6f-1c37290f001f | Tariq Bello       | +2348000000037 | Tier 1 - Basic Wallet        |                50000.00 | 1000000177     | SAVINGS         |       410434.0029 | ACTIVE
+ e3622ece-67be-471d-8a6f-1c37290f001f | Tariq Bello       | +2348000000037 | Tier 1 - Basic Wallet        |                50000.00 | 1000000178     | MERCHANT_WALLET |       640992.4390 | ACTIVE
+ 4d608871-2db5-4a27-997b-bc334588d100 | Temitope Adeyemi  | +2348000000042 | Tier 2 - Verified Individual |               200000.00 | 1000000055     | SAVINGS         |       200355.8936 | ACTIVE
+ 4d608871-2db5-4a27-997b-bc334588d100 | Temitope Adeyemi  | +2348000000042 | Tier 2 - Verified Individual |               200000.00 | 1000000056     | MERCHANT_WALLET |       695599.1498 | ACTIVE
+ 63c5c7dc-8592-4e9a-9d50-2356451cc1f1 | Temitope Adeyemi  | +2348000000096 | Tier 2 - Verified Individual |               200000.00 | 1000000075     | SAVINGS         |       767970.7893 | ACTIVE
+ 63c5c7dc-8592-4e9a-9d50-2356451cc1f1 | Temitope Adeyemi  | +2348000000096 | Tier 2 - Verified Individual |               200000.00 | 1000000076     | MERCHANT_WALLET |       751158.7280 | ACTIVE
+ bc331689-b7a0-4579-875c-151109e90643 | Temitope Adeyemi  | +2348000000060 | Tier 3 - Premium Account     |              5000000.00 | 1000000149     | SAVINGS         |       371656.4317 | ACTIVE
+ bc331689-b7a0-4579-875c-151109e90643 | Temitope Adeyemi  | +2348000000060 | Tier 3 - Premium Account     |              5000000.00 | 1000000150     | CURRENT         |       446514.3599 | ACTIVE
+ d5f562b4-512a-455e-a6be-cb85356699fd | Temitope Adeyemi  | +2348000000078 | Tier 2 - Verified Individual |               200000.00 | 1000000167     | SAVINGS         |       523634.2148 | ACTIVE
+ d5f562b4-512a-455e-a6be-cb85356699fd | Temitope Adeyemi  | +2348000000078 | Tier 2 - Verified Individual |               200000.00 | 1000000168     | MERCHANT_WALLET |        17324.1351 | ACTIVE
+ f5313901-a6a8-4b81-af0a-c3d3284a7ba4 | Temitope Adeyemi  | +2348000000024 | Tier 2 - Verified Individual |               200000.00 | 1000000187     | SAVINGS         |        46833.1512 | ACTIVE
+ f5313901-a6a8-4b81-af0a-c3d3284a7ba4 | Temitope Adeyemi  | +2348000000024 | Tier 2 - Verified Individual |               200000.00 | 1000000188     | MERCHANT_WALLET |       388692.4261 | ACTIVE
+ 09cc349e-3c73-4cb4-906e-19192753e84f | Yetunde Ajayi     | +2348000000017 | Tier 1 - Basic Wallet        |                50000.00 | 1000000007     | SAVINGS         |       312542.7771 | ACTIVE
+ 09cc349e-3c73-4cb4-906e-19192753e84f | Yetunde Ajayi     | +2348000000017 | Tier 1 - Basic Wallet        |                50000.00 | 1000000008     | MERCHANT_WALLET |       592607.6453 | ACTIVE
+ 25da6024-2bb4-4b53-a25b-c90651959e81 | Yetunde Ajayi     | +2348000000053 | Tier 1 - Basic Wallet        |                50000.00 | 1000000029     | SAVINGS         |        78845.3917 | ACTIVE
+ 25da6024-2bb4-4b53-a25b-c90651959e81 | Yetunde Ajayi     | +2348000000053 | Tier 1 - Basic Wallet        |                50000.00 | 1000000030     | MERCHANT_WALLET |       792896.2740 | ACTIVE
+ 580220c3-d43f-427a-9e6d-4a3ed83f0871 | Yetunde Ajayi     | +2348000000035 | Tier 3 - Premium Account     |              5000000.00 | 1000000065     | SAVINGS         |       668406.9902 | ACTIVE
+ 580220c3-d43f-427a-9e6d-4a3ed83f0871 | Yetunde Ajayi     | +2348000000035 | Tier 3 - Premium Account     |              5000000.00 | 1000000066     | CURRENT         |       732498.0584 | ACTIVE
+ 91947533-1108-4553-a225-ad89726899a2 | Yetunde Ajayi     | +2348000000071 | Tier 1 - Basic Wallet        |                50000.00 | 1000000101     | SAVINGS         |        95381.7302 | ACTIVE
+ 91947533-1108-4553-a225-ad89726899a2 | Yetunde Ajayi     | +2348000000071 | Tier 1 - Basic Wallet        |                50000.00 | 1000000102     | MERCHANT_WALLET |       754014.2354 | ACTIVE
+ f0baaabd-ac67-49e7-a84f-9a339f5ee595 | Yetunde Ajayi     | +2348000000089 | Tier 1 - Basic Wallet        |                50000.00 | 1000000181     | SAVINGS         |        59545.0793 | ACTIVE
+ f0baaabd-ac67-49e7-a84f-9a339f5ee595 | Yetunde Ajayi     | +2348000000089 | Tier 1 - Basic Wallet        |                50000.00 | 1000000182     | MERCHANT_WALLET |       311241.1867 | ACTIVE
+ 048d5e6a-3baf-4063-b44d-bfeed8b37adb | Zainab Babatunde  | +2348000000031 | Tier 1 - Basic Wallet        |                50000.00 | 1000000001     | SAVINGS         |       743145.4329 | ACTIVE
+ 048d5e6a-3baf-4063-b44d-bfeed8b37adb | Zainab Babatunde  | +2348000000031 | Tier 1 - Basic Wallet        |                50000.00 | 1000000002     | MERCHANT_WALLET |        53617.6803 | ACTIVE
+ 798efb23-1146-44b1-92bf-85cdd553bf0c | Zainab Babatunde  | +2348000000067 | Tier 1 - Basic Wallet        |                50000.00 | 1000000089     | SAVINGS         |       752627.5024 | ACTIVE
+ 798efb23-1146-44b1-92bf-85cdd553bf0c | Zainab Babatunde  | +2348000000067 | Tier 1 - Basic Wallet        |                50000.00 | 1000000090     | MERCHANT_WALLET |       716831.3051 | ACTIVE
+ 9cda17e8-4a3f-4974-bb3d-2ba9abf1820d | Zainab Babatunde  | +2348000000085 | Tier 3 - Premium Account     |              5000000.00 | 1000000105     | SAVINGS         |       208768.0330 | ACTIVE
+ 9cda17e8-4a3f-4974-bb3d-2ba9abf1820d | Zainab Babatunde  | +2348000000085 | Tier 3 - Premium Account     |              5000000.00 | 1000000106     | CURRENT         |       814287.9521 | ACTIVE
+ d1b1b918-ec41-4bd2-bb23-2cf15aa977db | Zainab Babatunde  | +2348000000049 | Tier 1 - Basic Wallet        |                50000.00 | 1000000159     | SAVINGS         |       628444.9682 | ACTIVE
+ d1b1b918-ec41-4bd2-bb23-2cf15aa977db | Zainab Babatunde  | +2348000000049 | Tier 1 - Basic Wallet        |                50000.00 | 1000000160     | MERCHANT_WALLET |       303491.8788 | ACTIVE
+ f308f7ed-98e1-41ad-8b14-8d4f5900a96c | Zainab Babatunde  | +2348000000013 | Tier 1 - Basic Wallet        |                50000.00 | 1000000185     | SAVINGS         |        32109.1040 | ACTIVE
+ f308f7ed-98e1-41ad-8b14-8d4f5900a96c | Zainab Babatunde  | +2348000000013 | Tier 1 - Basic Wallet        |                50000.00 | 1000000186     | MERCHANT_WALLET |       369956.0955 | ACTIVE
+(215 rows)
+
+ transaction_reference |       created_at       | account_holder | account_number | transaction_type |    category    |   amount   | balance_after |             narration             
+-----------------------+------------------------+----------------+----------------+------------------+----------------+------------+---------------+-----------------------------------
+ FP-TRF-20261002-0001  | 2026-10-02 13:20:00+00 | John Adeyemi   | 0123456789     | DEBIT            | INTRA_TRANSFER | 25000.0000 |   125000.0000 | FinPay Transfer to Sarah Okafor
+ FP-TRF-20261002-0002  | 2026-10-02 13:20:01+00 | Sarah Okafor   | 0223456781     | CREDIT           | INTRA_TRANSFER | 25000.0000 |   110000.0000 | FinPay Transfer from John Adeyemi
+(2 rows)
+
+psql:/portfolio-1/04-verification-tests.sql:75: NOTICE:  SUCCESS (Test 4A): Negative balance correctly blocked by chk_available_balance_non_negative.
+DO
+DO
+psql:/portfolio-1/04-verification-tests.sql:87: NOTICE:  SUCCESS (Test 4B): Invalid NUBAN format correctly blocked by chk_nuban_format.
+psql:/portfolio-1/04-verification-tests.sql:99: NOTICE:  SUCCESS (Test 4C): Duplicate phone number correctly blocked by unique constraint.
+DO
+DO
+psql:/portfolio-1/04-verification-tests.sql:114: NOTICE:  SUCCESS (Test 4D): Debit on restricted account correctly blocked by trigger: Transaction rejected: Account b0000000-0000-0000-0000-000000000012 is currently in FROZEN_PND status (Debits restricted).
+             customer_id              |   customer_name   | tier_level |          tier_name           | max_balance_limit | account_number | available_balance | compliance_status 
+--------------------------------------+-------------------+------------+------------------------------+-------------------+----------------+-------------------+-------------------
+ a0000000-0000-0000-0000-000000000012 | Ngozi Okonjo      |          3 | Tier 3 - Premium Account     |                   | 0123556789     |      5800000.0000 | COMPLIANT
+ a0000000-0000-0000-0000-000000000009 | Babatunde Adeleke |          3 | Tier 3 - Premium Account     |                   | 0923456788     |      1250000.0000 | COMPLIANT
+ 1614a5b4-c9d3-447d-91d4-ea1303dcd754 | Chukwudi Aliyu    |          3 | Tier 3 - Premium Account     |                   | 1000000019     |       845443.9663 | COMPLIANT
+ 60a1d514-0613-42dc-aa22-2e15f768bd9a | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000071     |       843236.4245 | REGULATORY_BREACH
+ a0000000-0000-0000-0000-000000000003 | David Bello       |          3 | Tier 3 - Premium Account     |                   | 1000000113     |       836107.0171 | COMPLIANT
+ f5a21241-b09b-4ffc-8f40-6d5532bd23cf | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000189     |       834164.7981 | REGULATORY_BREACH
+ 4ee1fd10-5d53-4bd9-987a-12d2bf055832 | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000057     |       824505.9379 | REGULATORY_BREACH
+ 9cda17e8-4a3f-4974-bb3d-2ba9abf1820d | Zainab Babatunde  |          3 | Tier 3 - Premium Account     |                   | 1000000106     |       814287.9521 | COMPLIANT
+ f292491c-5fd1-4f3d-af18-7ffbd6a621e4 | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000183     |       806239.7157 | REGULATORY_BREACH
+ b829e932-e1d9-4683-ade5-6b125d03c061 | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000145     |       799252.6226 | REGULATORY_BREACH
+ feb0518b-8d2e-407e-a43c-cff6052fb2db | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000202     |       796147.6675 | REGULATORY_BREACH
+ 25da6024-2bb4-4b53-a25b-c90651959e81 | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000030     |       792896.2740 | REGULATORY_BREACH
+ d6559b2c-3394-4340-96d5-3da6392b3a2a | Simisola Garba    |          3 | Tier 3 - Premium Account     |                   | 1000000170     |       787054.4534 | COMPLIANT
+ ab20b342-afc5-401c-a4da-53f2a606a1c1 | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000139     |       786405.7438 | REGULATORY_BREACH
+ 16272566-4dbd-4820-9907-c145c4c36916 | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000022     |       786226.4670 | REGULATORY_BREACH
+ 50278b6d-ae07-4fc7-affe-e5d8b9c20c4a | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000064     |       785596.5728 | REGULATORY_BREACH
+ 9c490cf8-cfaa-4caf-afe1-c4d756702bb4 | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000103     |       785337.3512 | REGULATORY_BREACH
+ 1193e1ee-727c-4f0d-bf27-2abd96c0ec45 | Onyinye Nwankwo   |          3 | Tier 3 - Premium Account     |                   | 1000000014     |       785203.1470 | COMPLIANT
+ d45c6c67-4864-4ce5-924d-252bd43464ce | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000164     |       782584.5849 | REGULATORY_BREACH
+ f292491c-5fd1-4f3d-af18-7ffbd6a621e4 | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000184     |       777303.7777 | REGULATORY_BREACH
+ d18baa49-d00a-4c06-99e8-74d292872d44 | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000157     |       774001.7527 | REGULATORY_BREACH
+ 8c6f5d12-388b-4268-9028-f2fc838a77b8 | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000100     |       773643.6878 | REGULATORY_BREACH
+ 79ba6511-aa03-4d6a-bd19-4d5f75177eaf | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000091     |       773040.5458 | REGULATORY_BREACH
+ 63c5c7dc-8592-4e9a-9d50-2356451cc1f1 | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000075     |       767970.7893 | REGULATORY_BREACH
+ 3ccce609-8bc1-4a57-88c4-4e2477cf0563 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000041     |       761818.1632 | REGULATORY_BREACH
+ 91947533-1108-4553-a225-ad89726899a2 | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000102     |       754014.2354 | REGULATORY_BREACH
+ 798efb23-1146-44b1-92bf-85cdd553bf0c | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000089     |       752627.5024 | REGULATORY_BREACH
+ 63c5c7dc-8592-4e9a-9d50-2356451cc1f1 | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000076     |       751158.7280 | REGULATORY_BREACH
+ 69eb21ed-6e9c-465a-94aa-e6300cae9cfd | Tariq Bello       |          3 | Tier 3 - Premium Account     |                   | 1000000082     |       743867.1094 | COMPLIANT
+ 048d5e6a-3baf-4063-b44d-bfeed8b37adb | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000001     |       743145.4329 | REGULATORY_BREACH
+ 6a015f93-0bfd-4b4f-9718-643748071d28 | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000084     |       735928.1199 | REGULATORY_BREACH
+ a0000000-0000-0000-0000-000000000004 | Amina Yusuf       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000116     |       735212.8686 | REGULATORY_BREACH
+ 580220c3-d43f-427a-9e6d-4a3ed83f0871 | Yetunde Ajayi     |          3 | Tier 3 - Premium Account     |                   | 1000000066     |       732498.0584 | COMPLIANT
+ 10f25bc9-55c2-4189-a46a-7b6aacab41a6 | Kelechi Adeleke   |          3 | Tier 3 - Premium Account     |                   | 1000000012     |       730182.1266 | COMPLIANT
+ 3ccce609-8bc1-4a57-88c4-4e2477cf0563 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000042     |       726298.8376 | REGULATORY_BREACH
+ 798efb23-1146-44b1-92bf-85cdd553bf0c | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000090     |       716831.3051 | REGULATORY_BREACH
+ 5d3a6e65-f6ba-4bd1-84d0-6c1441796f8e | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000069     |       714808.6126 | REGULATORY_BREACH
+ 39fb5770-999a-45f6-9e27-b08035dbd2cb | Folake Balogun    |          3 | Tier 3 - Premium Account     |                   | 1000000040     |       712568.5201 | COMPLIANT
+ fdcc6a54-fe9b-420d-81e3-8030c4939022 | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000197     |       711510.8893 | REGULATORY_BREACH
+ 4abfdae2-8ea5-4447-93cb-fe63da6a8269 | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000051     |       710733.5780 | REGULATORY_BREACH
+ 69c793a0-88b4-4f7f-a004-e54d8817d4b4 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000079     |       699093.5220 | REGULATORY_BREACH
+ 26c55fec-b28b-45d9-b079-66f2371549b8 | Damilola Okonkwo  |          3 | Tier 3 - Premium Account     |                   | 1000000032     |       696434.8117 | COMPLIANT
+ 4d608871-2db5-4a27-997b-bc334588d100 | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000056     |       695599.1498 | REGULATORY_BREACH
+ ca9cee39-c863-494b-9749-fcbbca51694f | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000155     |       687252.2321 | REGULATORY_BREACH
+ 4ee1fd10-5d53-4bd9-987a-12d2bf055832 | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000058     |       684356.2044 | REGULATORY_BREACH
+ 580220c3-d43f-427a-9e6d-4a3ed83f0871 | Yetunde Ajayi     |          3 | Tier 3 - Premium Account     |                   | 1000000065     |       668406.9902 | COMPLIANT
+ 79ba6511-aa03-4d6a-bd19-4d5f75177eaf | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000092     |       661880.9484 | REGULATORY_BREACH
+ 9d810cb4-49d2-4efc-b942-5f60db5de45a | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000110     |       652906.6427 | REGULATORY_BREACH
+ 60a1d514-0613-42dc-aa22-2e15f768bd9a | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000072     |       652112.7013 | REGULATORY_BREACH
+ a698debb-4fde-4812-a76b-b0e1af14c79d | Olumide Yusuf     |          3 | Tier 3 - Premium Account     |                   | 1000000135     |       651790.5732 | COMPLIANT
+ c12ae5e1-a9e4-49f6-be26-74576611aeac | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000152     |       646097.3710 | REGULATORY_BREACH
+ e3622ece-67be-471d-8a6f-1c37290f001f | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000178     |       640992.4390 | REGULATORY_BREACH
+ 3cd91fbb-537f-4fda-a139-714b864b3830 | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000043     |       639752.6793 | REGULATORY_BREACH
+ dd36729e-088e-4489-8ce4-744266ca58cc | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000176     |       635783.9470 | REGULATORY_BREACH
+ 46fd6e28-ebf0-4b79-8ab6-7b145300167f | Abubakar Momodu   |          3 | Tier 3 - Premium Account     |                   | 1000000049     |       634201.1900 | COMPLIANT
+ d1b1b918-ec41-4bd2-bb23-2cf15aa977db | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000159     |       628444.9682 | REGULATORY_BREACH
+ 83021738-0853-4bbb-9c1b-ed5cec2a301d | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000097     |       621086.9231 | REGULATORY_BREACH
+ 6a015f93-0bfd-4b4f-9718-643748071d28 | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000083     |       621021.8836 | REGULATORY_BREACH
+ a0000000-0000-0000-0000-000000000006 | Folake Balogun    |          3 | Tier 3 - Premium Account     |                   | 0623456785     |       620000.0000 | COMPLIANT
+ fe64aed8-68fb-42f2-91e9-d46be0ead91c | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000200     |       611379.2982 | REGULATORY_BREACH
+ a0000000-0000-0000-0000-000000000009 | Babatunde Adeleke |          3 | Tier 3 - Premium Account     |                   | 1000000126     |       604026.0792 | COMPLIANT
+ 15b4e800-0429-492d-8483-87d4f13d621f | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000017     |       600641.1458 | REGULATORY_BREACH
+ c77ff771-e423-4db5-be42-1cee84f6fdfd | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000153     |       597209.7353 | REGULATORY_BREACH
+ b5d1029f-c797-445a-abdb-f4e91788c63c | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000143     |       596857.9192 | REGULATORY_BREACH
+ 09cc349e-3c73-4cb4-906e-19192753e84f | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000008     |       592607.6453 | REGULATORY_BREACH
+ aeab2654-070c-4ba7-8f12-4b85b322eb6e | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000142     |       589937.4350 | REGULATORY_BREACH
+ 60fabb25-068c-45d3-b9f4-fb050207a911 | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000073     |       583799.1053 | REGULATORY_BREACH
+ a698debb-4fde-4812-a76b-b0e1af14c79d | Olumide Yusuf     |          3 | Tier 3 - Premium Account     |                   | 1000000136     |       581495.1776 | COMPLIANT
+ 4668dd28-5312-4166-82a7-ceb1e05421b7 | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000047     |       566177.1659 | REGULATORY_BREACH
+ fe64aed8-68fb-42f2-91e9-d46be0ead91c | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000199     |       566137.4004 | REGULATORY_BREACH
+ 5a62950a-f0fb-44b7-8aff-e8b52bb80a66 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000068     |       559554.5361 | REGULATORY_BREACH
+ 60fabb25-068c-45d3-b9f4-fb050207a911 | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000074     |       558902.7249 | REGULATORY_BREACH
+ 69eb21ed-6e9c-465a-94aa-e6300cae9cfd | Tariq Bello       |          3 | Tier 3 - Premium Account     |                   | 1000000081     |       557822.8394 | COMPLIANT
+ 8c6f5d12-388b-4268-9028-f2fc838a77b8 | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000099     |       557425.3065 | REGULATORY_BREACH
+ a0000000-0000-0000-0000-000000000004 | Amina Yusuf       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000115     |       556162.3344 | REGULATORY_BREACH
+ 1614a5b4-c9d3-447d-91d4-ea1303dcd754 | Chukwudi Aliyu    |          3 | Tier 3 - Premium Account     |                   | 1000000020     |       553088.8239 | COMPLIANT
+ fa35471d-3611-4264-9076-134745914114 | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000191     |       551658.5795 | REGULATORY_BREACH
+ d97a76d0-86f6-4cd4-8d14-34946d4e1aa8 | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000174     |       549278.7555 | REGULATORY_BREACH
+ 806a1243-8fe4-440c-aa14-d421cd0b2923 | Fatima Eze        |          3 | Tier 3 - Premium Account     |                   | 1000000093     |       534236.8930 | COMPLIANT
+ 4f75388d-b88c-40e0-88fd-013955288877 | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000061     |       525874.4937 | REGULATORY_BREACH
+ d5f562b4-512a-455e-a6be-cb85356699fd | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000167     |       523634.2148 | REGULATORY_BREACH
+ 9d68c3ab-a1ed-4011-9d23-7904b9144b03 | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000107     |       518017.3368 | REGULATORY_BREACH
+ 4cff9bf8-1a08-4a25-9fa4-3f1ef9a93f8b | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000054     |       513570.4339 | REGULATORY_BREACH
+ d7243381-d2ca-4547-b07e-8a1329afb026 | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000171     |       507492.0698 | REGULATORY_BREACH
+ bc05670e-57a5-4e32-87cd-ab57e88fc7a7 | Adebayo Okafor    |          3 | Tier 3 - Premium Account     |                   | 1000000148     |       502086.9220 | COMPLIANT
+ d18baa49-d00a-4c06-99e8-74d292872d44 | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000158     |       500063.6145 | REGULATORY_BREACH
+ 3140b18f-f846-455e-9822-434aab1a228b | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000036     |       488653.7992 | REGULATORY_BREACH
+ ec1a065b-7cfe-4328-b01f-a72cecc496ef | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000179     |       485497.5342 | COMPLIANT
+ feb0518b-8d2e-407e-a43c-cff6052fb2db | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000201     |       483515.1380 | REGULATORY_BREACH
+ 69c793a0-88b4-4f7f-a004-e54d8817d4b4 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000080     |       471580.0990 | COMPLIANT
+ 4f75388d-b88c-40e0-88fd-013955288877 | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000062     |       469807.6413 | REGULATORY_BREACH
+ 4f23310e-b988-415f-80e0-32dff8cb72b5 | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000060     |       469707.8602 | COMPLIANT
+ a57c6b4a-708e-4084-b85e-3b08965a0b10 | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000134     |       468872.4660 | COMPLIANT
+ a0000000-0000-0000-0000-000000000003 | David Bello       |          3 | Tier 3 - Premium Account     |                   | 1000000114     |       464081.7002 | COMPLIANT
+ b5d1029f-c797-445a-abdb-f4e91788c63c | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000144     |       456578.6379 | COMPLIANT
+ a0000000-0000-0000-0000-000000000001 | John Adeyemi      |          3 | Tier 3 - Premium Account     |                   | 0123456790     |       450000.0000 | COMPLIANT
+ bc331689-b7a0-4579-875c-151109e90643 | Temitope Adeyemi  |          3 | Tier 3 - Premium Account     |                   | 1000000150     |       446514.3599 | COMPLIANT
+ a0000000-0000-0000-0000-000000000009 | Babatunde Adeleke |          3 | Tier 3 - Premium Account     |                   | 1000000125     |       446396.9823 | COMPLIANT
+ a0000000-0000-0000-0000-000000000011 | Olumide Fashola   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000130     |       442782.4074 | REGULATORY_BREACH
+ ca9cee39-c863-494b-9749-fcbbca51694f | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000156     |       441540.1226 | REGULATORY_BREACH
+ a0000000-0000-0000-0000-000000000002 | Sarah Okafor      |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000112     |       433281.9861 | COMPLIANT
+ 9d810cb4-49d2-4efc-b942-5f60db5de45a | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000109     |       428819.2427 | COMPLIANT
+ a57c6b4a-708e-4084-b85e-3b08965a0b10 | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000133     |       415056.5581 | COMPLIANT
+ d6559b2c-3394-4340-96d5-3da6392b3a2a | Simisola Garba    |          3 | Tier 3 - Premium Account     |                   | 1000000169     |       414014.8563 | COMPLIANT
+ 46fd6e28-ebf0-4b79-8ab6-7b145300167f | Abubakar Momodu   |          3 | Tier 3 - Premium Account     |                   | 1000000050     |       411724.3167 | COMPLIANT
+ 08d7ebcd-8c1c-4974-b402-cd72b5f94460 | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000005     |       411440.2830 | REGULATORY_BREACH
+ e3622ece-67be-471d-8a6f-1c37290f001f | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000177     |       410434.0029 | REGULATORY_BREACH
+ 0dbfdc4f-e3c8-45c5-ae9d-cfaae4de1792 | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000010     |       410344.4840 | COMPLIANT
+ 3e05ef03-1af2-4473-ba1d-bfc71303cd71 | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000045     |       409900.8875 | REGULATORY_BREACH
+ 3cd91fbb-537f-4fda-a139-714b864b3830 | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000044     |       405487.3352 | REGULATORY_BREACH
+ 0dbfdc4f-e3c8-45c5-ae9d-cfaae4de1792 | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000009     |       396711.1830 | COMPLIANT
+ 9c490cf8-cfaa-4caf-afe1-c4d756702bb4 | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000104     |       396125.4280 | REGULATORY_BREACH
+ a9cb7ed2-b8db-4935-a3d8-9ea9ee53829d | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000137     |       394460.9631 | REGULATORY_BREACH
+ 082926ad-ffe8-411a-9085-65b5ab0ac90e | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000004     |       391741.3180 | REGULATORY_BREACH
+ f5313901-a6a8-4b81-af0a-c3d3284a7ba4 | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000188     |       388692.4261 | COMPLIANT
+ fd226cd5-aa11-4f86-8ea5-5d10c2494936 | Nnamdi Danjuma    |          3 | Tier 3 - Premium Account     |                   | 1000000195     |       375846.6362 | COMPLIANT
+ bc331689-b7a0-4579-875c-151109e90643 | Temitope Adeyemi  |          3 | Tier 3 - Premium Account     |                   | 1000000149     |       371656.4317 | COMPLIANT
+ f308f7ed-98e1-41ad-8b14-8d4f5900a96c | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000186     |       369956.0955 | REGULATORY_BREACH
+ d24af1f0-5402-427c-98f2-36ed51e02c1c | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000162     |       369471.2077 | COMPLIANT
+ fd226cd5-aa11-4f86-8ea5-5d10c2494936 | Nnamdi Danjuma    |          3 | Tier 3 - Premium Account     |                   | 1000000196     |       369260.8702 | COMPLIANT
+ 6b1d9c53-be62-4ad5-aae8-afe2b5ac6b0e | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000086     |       358530.1788 | COMPLIANT
+ 241e0a0b-1c1c-4607-8769-0d5284d6dc0a | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000025     |       356910.0848 | REGULATORY_BREACH
+ b829e932-e1d9-4683-ade5-6b125d03c061 | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000146     |       351573.4496 | COMPLIANT
+ c12ae5e1-a9e4-49f6-be26-74576611aeac | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000151     |       349582.4474 | COMPLIANT
+ a0000000-0000-0000-0000-000000000012 | Ngozi Okonjo      |          3 | Tier 3 - Premium Account     |                   | 1000000131     |       337489.4692 | COMPLIANT
+ a0000000-0000-0000-0000-000000000005 | Emeka Nwosu       |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000118     |       335631.9312 | COMPLIANT
+ d24af1f0-5402-427c-98f2-36ed51e02c1c | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000161     |       334444.6485 | COMPLIANT
+ bc05670e-57a5-4e32-87cd-ab57e88fc7a7 | Adebayo Okafor    |          3 | Tier 3 - Premium Account     |                   | 1000000147     |       332268.7035 | COMPLIANT
+ 50278b6d-ae07-4fc7-affe-e5d8b9c20c4a | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000063     |       323908.7989 | REGULATORY_BREACH
+ 9d68c3ab-a1ed-4011-9d23-7904b9144b03 | Kayode Nwachukwu  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000108     |       318779.8354 | COMPLIANT
+ 3e05ef03-1af2-4473-ba1d-bfc71303cd71 | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000046     |       317069.8082 | REGULATORY_BREACH
+ 1fb81e7f-b704-48ec-a6bd-871a02970fe6 | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000023     |       314749.1530 | COMPLIANT
+ 09cc349e-3c73-4cb4-906e-19192753e84f | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000007     |       312542.7771 | REGULATORY_BREACH
+ f0baaabd-ac67-49e7-a84f-9a339f5ee595 | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000182     |       311241.1867 | REGULATORY_BREACH
+ d1b1b918-ec41-4bd2-bb23-2cf15aa977db | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000160     |       303491.8788 | REGULATORY_BREACH
+ d97a76d0-86f6-4cd4-8d14-34946d4e1aa8 | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000173     |       298620.0495 | COMPLIANT
+ a0000000-0000-0000-0000-000000000011 | Olumide Fashola   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000129     |       297605.0895 | COMPLIANT
+ 082926ad-ffe8-411a-9085-65b5ab0ac90e | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000003     |       275611.1558 | COMPLIANT
+ a9cb7ed2-b8db-4935-a3d8-9ea9ee53829d | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000138     |       271781.2379 | COMPLIANT
+ a0000000-0000-0000-0000-000000000002 | Sarah Okafor      |          2 | Tier 2 - Verified Individual |         500000.00 | 0223456781     |       266000.0000 | COMPLIANT
+ 252450a5-c3ba-48fc-a28e-e3c07d731e39 | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000028     |       253963.2720 | COMPLIANT
+ 252450a5-c3ba-48fc-a28e-e3c07d731e39 | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000027     |       252479.9608 | COMPLIANT
+ 16272566-4dbd-4820-9907-c145c4c36916 | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000021     |       250024.5063 | COMPLIANT
+ 4cff9bf8-1a08-4a25-9fa4-3f1ef9a93f8b | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000053     |       245900.6021 | COMPLIANT
+ aeab2654-070c-4ba7-8f12-4b85b322eb6e | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000141     |       244705.8944 | COMPLIANT
+ 15066c71-cdd8-4c38-b439-7d2bee50dd65 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000015     |       237715.1412 | COMPLIANT
+ 4668dd28-5312-4166-82a7-ceb1e05421b7 | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000048     |       234997.1756 | COMPLIANT
+ d7243381-d2ca-4547-b07e-8a1329afb026 | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000172     |       228181.2354 | COMPLIANT
+ 15066c71-cdd8-4c38-b439-7d2bee50dd65 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000016     |       224344.3253 | COMPLIANT
+ a0000000-0000-0000-0000-000000000005 | Emeka Nwosu       |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000117     |       223715.7600 | COMPLIANT
+ a0000000-0000-0000-0000-000000000007 | Ibrahim Danjuma   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000121     |       221771.9545 | COMPLIANT
+ dd36729e-088e-4489-8ce4-744266ca58cc | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000175     |       213380.6341 | COMPLIANT
+ 4f23310e-b988-415f-80e0-32dff8cb72b5 | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000059     |       209897.6443 | COMPLIANT
+ 33505cb2-5e88-4a04-b61d-0f90b8604278 | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000038     |       209045.3299 | COMPLIANT
+ 9cda17e8-4a3f-4974-bb3d-2ba9abf1820d | Zainab Babatunde  |          3 | Tier 3 - Premium Account     |                   | 1000000105     |       208768.0330 | COMPLIANT
+ 08d7ebcd-8c1c-4974-b402-cd72b5f94460 | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000006     |       201775.6688 | COMPLIANT
+ a0000000-0000-0000-0000-000000000012 | Ngozi Okonjo      |          3 | Tier 3 - Premium Account     |                   | 1000000132     |       200501.3299 | COMPLIANT
+ 4d608871-2db5-4a27-997b-bc334588d100 | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000055     |       200355.8936 | COMPLIANT
+ 67e8b5d1-5216-4106-827b-03bb535e5f52 | Mustapha Ogundipe |          3 | Tier 3 - Premium Account     |                   | 1000000078     |       198515.5636 | COMPLIANT
+ a0000000-0000-0000-0000-000000000010 | Halima Garba      |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000128     |       197750.2020 | COMPLIANT
+ a0000000-0000-0000-0000-000000000006 | Folake Balogun    |          3 | Tier 3 - Premium Account     |                   | 1000000119     |       191893.3206 | COMPLIANT
+ a0000000-0000-0000-0000-000000000002 | Sarah Okafor      |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000111     |       188254.6145 | COMPLIANT
+ 811cce53-bb13-407e-89dc-e686a06c9ffe | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000096     |       177679.1225 | COMPLIANT
+ 67e8b5d1-5216-4106-827b-03bb535e5f52 | Mustapha Ogundipe |          3 | Tier 3 - Premium Account     |                   | 1000000077     |       162030.4472 | COMPLIANT
+ 83021738-0853-4bbb-9c1b-ed5cec2a301d | Nnamdi Danjuma    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000098     |       158535.1299 | COMPLIANT
+ c77ff771-e423-4db5-be42-1cee84f6fdfd | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000154     |       154627.8786 | COMPLIANT
+ fc260ace-d69f-49bf-bfc5-9d098734b150 | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000193     |       152708.9852 | COMPLIANT
+ 4abfdae2-8ea5-4447-93cb-fe63da6a8269 | Tariq Bello       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000052     |       145160.4822 | COMPLIANT
+ f5a21241-b09b-4ffc-8f40-6d5532bd23cf | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000190     |       139973.7722 | COMPLIANT
+ 26c55fec-b28b-45d9-b079-66f2371549b8 | Damilola Okonkwo  |          3 | Tier 3 - Premium Account     |                   | 1000000031     |       136492.6587 | COMPLIANT
+ 1193e1ee-727c-4f0d-bf27-2abd96c0ec45 | Onyinye Nwankwo   |          3 | Tier 3 - Premium Account     |                   | 1000000013     |       129104.0844 | COMPLIANT
+ a0000000-0000-0000-0000-000000000006 | Folake Balogun    |          3 | Tier 3 - Premium Account     |                   | 1000000120     |       120057.7895 | COMPLIANT
+ 811cce53-bb13-407e-89dc-e686a06c9ffe | Fatima Eze        |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000095     |       119560.2963 | COMPLIANT
+ ec1a065b-7cfe-4328-b01f-a72cecc496ef | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000180     |       119187.4192 | COMPLIANT
+ a0000000-0000-0000-0000-000000000001 | John Adeyemi      |          3 | Tier 3 - Premium Account     |                   | 0123456789     |       119000.0000 | COMPLIANT
+ 39fb5770-999a-45f6-9e27-b08035dbd2cb | Folake Balogun    |          3 | Tier 3 - Premium Account     |                   | 1000000039     |       118157.9995 | COMPLIANT
+ a0000000-0000-0000-0000-000000000008 | Chidinma Eze      |          2 | Tier 2 - Verified Individual |         500000.00 | 0823456787     |       110000.0000 | COMPLIANT
+ 6f36c83b-9cf9-4ba2-9d27-6132dd65630a | Chioma Suleiman   |          3 | Tier 3 - Premium Account     |                   | 1000000087     |       109820.0315 | COMPLIANT
+ d45c6c67-4864-4ce5-924d-252bd43464ce | Chukwudi Aliyu    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000163     |       104094.1285 | COMPLIANT
+ a0000000-0000-0000-0000-000000000008 | Chidinma Eze      |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000123     |       103901.3790 | COMPLIANT
+ 91947533-1108-4553-a225-ad89726899a2 | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000101     |        95381.7302 | COMPLIANT
+ ab20b342-afc5-401c-a4da-53f2a606a1c1 | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000140     |        94125.9750 | COMPLIANT
+ 241e0a0b-1c1c-4607-8769-0d5284d6dc0a | Damilola Okonkwo  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000026     |        89776.2607 | COMPLIANT
+ 291bad09-b0ba-4485-9cdd-536826108d3a | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000033     |        87831.7725 | COMPLIANT
+ fa35471d-3611-4264-9076-134745914114 | Adebayo Okafor    |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000192     |        80643.4110 | COMPLIANT
+ a0000000-0000-0000-0000-000000000003 | David Bello       |          3 | Tier 3 - Premium Account     |                   | 0323456782     |        80000.0000 | COMPLIANT
+ 25da6024-2bb4-4b53-a25b-c90651959e81 | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000029     |        78845.3917 | COMPLIANT
+ 33505cb2-5e88-4a04-b61d-0f90b8604278 | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000037     |        77612.9793 | COMPLIANT
+ a0000000-0000-0000-0000-000000000010 | Halima Garba      |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000127     |        76117.7967 | COMPLIANT
+ a0000000-0000-0000-0000-000000000007 | Ibrahim Danjuma   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000122     |        76105.1591 | COMPLIANT
+ a0000000-0000-0000-0000-000000000005 | Emeka Nwosu       |          2 | Tier 2 - Verified Individual |         500000.00 | 0523456784     |        75000.0000 | COMPLIANT
+ 5a62950a-f0fb-44b7-8aff-e8b52bb80a66 | Simisola Garba    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000067     |        73370.5092 | COMPLIANT
+ 3140b18f-f846-455e-9822-434aab1a228b | Onyinye Nwankwo   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000035     |        65995.4359 | COMPLIANT
+ fdcc6a54-fe9b-420d-81e3-8030c4939022 | Folake Balogun    |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000198     |        65444.7518 | COMPLIANT
+ fc260ace-d69f-49bf-bfc5-9d098734b150 | Chioma Suleiman   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000194     |        64475.0854 | COMPLIANT
+ f0baaabd-ac67-49e7-a84f-9a339f5ee595 | Yetunde Ajayi     |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000181     |        59545.0793 | COMPLIANT
+ 5d3a6e65-f6ba-4bd1-84d0-6c1441796f8e | Olumide Yusuf     |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000070     |        58524.9190 | COMPLIANT
+ 048d5e6a-3baf-4063-b44d-bfeed8b37adb | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000002     |        53617.6803 | COMPLIANT
+ 6b1d9c53-be62-4ad5-aae8-afe2b5ac6b0e | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000085     |        53411.6235 | COMPLIANT
+ 291bad09-b0ba-4485-9cdd-536826108d3a | Kelechi Adeleke   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000034     |        48323.9356 | COMPLIANT
+ 1fb81e7f-b704-48ec-a6bd-871a02970fe6 | Mustapha Ogundipe |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000024     |        47544.5204 | COMPLIANT
+ f5313901-a6a8-4b81-af0a-c3d3284a7ba4 | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000187     |        46833.1512 | COMPLIANT
+ a0000000-0000-0000-0000-000000000010 | Halima Garba      |          2 | Tier 2 - Verified Individual |         500000.00 | 0113456789     |        45000.0000 | COMPLIANT
+ a0000000-0000-0000-0000-000000000008 | Chidinma Eze      |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000124     |        43428.3093 | COMPLIANT
+ 10f25bc9-55c2-4189-a46a-7b6aacab41a6 | Kelechi Adeleke   |          3 | Tier 3 - Premium Account     |                   | 1000000011     |        41010.3727 | COMPLIANT
+ f308f7ed-98e1-41ad-8b14-8d4f5900a96c | Zainab Babatunde  |          1 | Tier 1 - Basic Wallet        |         300000.00 | 1000000185     |        32109.1040 | COMPLIANT
+ d53951eb-bfff-4fc9-bcde-b93001c2ebab | Kayode Nwachukwu  |          3 | Tier 3 - Premium Account     |                   | 1000000166     |        22478.0185 | COMPLIANT
+ 15b4e800-0429-492d-8483-87d4f13d621f | Abubakar Momodu   |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000018     |        19381.5450 | COMPLIANT
+ d5f562b4-512a-455e-a6be-cb85356699fd | Temitope Adeyemi  |          2 | Tier 2 - Verified Individual |         500000.00 | 1000000168     |        17324.1351 | COMPLIANT
+ a0000000-0000-0000-0000-000000000004 | Amina Yusuf       |          1 | Tier 1 - Basic Wallet        |         300000.00 | 0423456783     |        15000.0000 | COMPLIANT
+ a0000000-0000-0000-0000-000000000011 | Olumide Fashola   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 0124456789     |        12000.0000 | COMPLIANT
+ 806a1243-8fe4-440c-aa14-d421cd0b2923 | Fatima Eze        |          3 | Tier 3 - Premium Account     |                   | 1000000094     |         9574.0980 | COMPLIANT
+ a0000000-0000-0000-0000-000000000007 | Ibrahim Danjuma   |          1 | Tier 1 - Basic Wallet        |         300000.00 | 0723456786     |         8500.0000 | COMPLIANT
+ 6f36c83b-9cf9-4ba2-9d27-6132dd65630a | Chioma Suleiman   |          3 | Tier 3 - Premium Account     |                   | 1000000088     |         6400.8863 | COMPLIANT
+ d53951eb-bfff-4fc9-bcde-b93001c2ebab | Kayode Nwachukwu  |          3 | Tier 3 - Premium Account     |                   | 1000000165     |         5146.6914 | COMPLIANT
+(215 rows)
+
