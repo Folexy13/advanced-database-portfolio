@@ -39,8 +39,19 @@ advanced-database-portfolio/
 │   ├── 03-optimization-indexes.sql        # Partial, composite, and covering indexes
 │   ├── 04-optimized-queries.sql           # Post-index EXPLAIN (ANALYZE, BUFFERS) execution
 │   └── README.md                          # Technical report: Benchmark analysis & optimizer internals
-├── portfolio-3-transactions-concurrency/  # [Upcoming] ACID guarantees, deadlocks & isolation levels
-├── portfolio-4-nosql/                     # [Upcoming] Polyglot model (MongoDB/Redis) for event audit & logs
+├── portfolio-3-transactions-concurrency/
+│   ├── 01-fund-transfer-procedure.sql     # ACID fund transfer function with deterministic locks
+│   ├── 02-commit-rollback-tests.sql       # Positive/negative atomicity & savepoint tests
+│   ├── 03-concurrency-control.sql         # Double-spending prevention & row-level locking
+│   ├── 04-isolation-levels.sql            # MVCC, non-repeatable reads, serializable analysis
+│   ├── 05-deadlock-handling.sql           # Deadlock simulation & deterministic ordering resolution
+│   └── README.md                          # Technical report: Concurrency, ACID & lock graphs
+├── portfolio-4-nosql/
+│   ├── 01-mongo-schema.js                 # Collections with JSON Schema, 2dsphere & TTL indexes
+│   ├── 02-mongo-seed.js                   # Telemetry events & polymorphic fraud case documents
+│   ├── 03-mongo-queries.js                # Aggregation pipelines (VPN, velocity, $facet, $unwind)
+│   ├── 04-relational-vs-nosql-comparison.md # Detailed architectural trade-off evaluation matrix
+│   └── README.md                          # Technical report: Polyglot persistence & document models
 ├── portfolio-5-distributed-cloud/         # [Upcoming] Replication, sharding & cloud DR architecture
 └── README.md                              # Portfolio master guide
 ```
@@ -66,8 +77,8 @@ advanced-database-portfolio/
 | :--- | :--- | :---: | :---: |
 | **Portfolio 1** | Database Design and Modelling | 7 Marks | **Completed** |
 | **Portfolio 2** | Query Processing and Optimisation | 7 Marks | **Completed** |
-| **Portfolio 3** | Transactions and Concurrency | 7 Marks | Scheduled |
-| **Portfolio 4** | NoSQL and Advanced Data Models | 7 Marks | Scheduled |
+| **Portfolio 3** | Transactions and Concurrency | 7 Marks | **Completed** |
+| **Portfolio 4** | NoSQL and Advanced Data Models | 7 Marks | **Completed** |
 | **Portfolio 5** | Distributed and Cloud Database Exercise | 6 Marks | Scheduled |
 | **Final Documentation** | Portfolio Documentation & Technical Reflection | 6 Marks | Scheduled |
 | **Total** | | **40 Marks** | |
