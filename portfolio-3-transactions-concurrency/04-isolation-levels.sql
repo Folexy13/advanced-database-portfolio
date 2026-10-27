@@ -2,7 +2,7 @@
 -- MIT 8103 Advanced Database Systems - Portfolio 3
 
 -- 1. Non-Repeatable Reads under READ COMMITTED
-\echo '=== Testing Non-Repeatable Read (READ COMMITTED) ==='
+\echo 'Testing Non-Repeatable Read (READ COMMITTED)'
 
 DO $$
 DECLARE
@@ -38,7 +38,7 @@ BEGIN
 END $$;
 
 -- 2. REPEATABLE READ snapshot isolation
-\echo '=== Testing Snapshot Isolation (REPEATABLE READ) ==='
+\echo 'Testing Snapshot Isolation (REPEATABLE READ)'
 
 DO $$
 DECLARE
@@ -50,7 +50,7 @@ BEGIN
 END $$;
 
 -- 3. Serializable Snapshot Isolation settings
-\echo '=== Current Transaction Isolation Settings ==='
+\echo 'Current Transaction Isolation Settings'
 SELECT 
     name,
     setting,

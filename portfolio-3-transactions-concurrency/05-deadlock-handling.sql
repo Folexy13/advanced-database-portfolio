@@ -2,7 +2,7 @@
 -- MIT 8103 Advanced Database Systems - Portfolio 3
 
 -- 1. Inspect engine deadlock settings
-\echo '=== PostgreSQL Deadlock Configuration ==='
+\echo 'PostgreSQL Deadlock Configuration'
 SELECT 
     name, 
     setting, 
@@ -14,7 +14,7 @@ WHERE name IN ('deadlock_timeout', 'lock_timeout', 'statement_timeout');
 -- 2. Verify deterministic global lock ordering in sp_execute_fund_transfer
 -- In bidirectional transfers (A -> B and B -> A), acquiring locks in ascending NUBAN order
 -- eliminates the circular wait condition required for deadlocks.
-\echo '=== Testing Bidirectional Transfers with Ordered Locking ==='
+\echo 'Testing Bidirectional Transfers with Ordered Locking'
 
 DO $$
 DECLARE

@@ -15,7 +15,7 @@ WHERE relation = 'accounts'::regclass;
 -- Simulate two simultaneous debits against David Bello (0323456782, balance 230,000 NGN)
 -- Transfer 1: 150,000 NGN
 -- Transfer 2: 100,000 NGN (cumulative exceeds balance)
-\echo '=== Testing Pessimistic Locking (SELECT FOR UPDATE) ==='
+\echo 'Testing Pessimistic Locking (SELECT FOR UPDATE)'
 
 DO $$
 DECLARE
@@ -49,7 +49,7 @@ WHERE account_number = '0323456782';
 
 -- 2. Optimistic Concurrency Control (OCC) pattern
 -- Used for profile updates with version token (updated_at)
-\echo '=== Testing Optimistic Concurrency Control (OCC) ==='
+\echo 'Testing Optimistic Concurrency Control (OCC)'
 
 DO $$
 DECLARE

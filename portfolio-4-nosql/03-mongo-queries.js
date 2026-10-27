@@ -4,7 +4,7 @@
 const dbInstance = db.getSiblingDB('finpay_nosql');
 
 // 1. Detect suspicious logins (VPN usage or logins outside Nigeria)
-print('--- Suspicious VPN & Foreign Access Queries ---');
+print('Suspicious VPN & Foreign Access Queries');
 const vpnAlertPipeline = [
     {
         $match: {
@@ -36,7 +36,7 @@ const vpnAlerts = dbInstance.device_telemetry.aggregate(vpnAlertPipeline).toArra
 printjson(vpnAlerts);
 
 // 2. Measure distinct devices and platforms per customer (credential stuffing detection)
-print('--- Customer Device Diversity & Platform Velocity ---');
+print('Customer Device Diversity & Platform Velocity');
 const deviceVelocityPipeline = [
     {
         $group: {
@@ -67,7 +67,7 @@ const velocityReport = dbInstance.device_telemetry.aggregate(deviceVelocityPipel
 printjson(velocityReport);
 
 // 3. Count remediation actions across incident files using $unwind
-print('--- Fraud Case Remediation Breakdown ---');
+print('Fraud Case Remediation Breakdown');
 const remediationPipeline = [
     { $unwind: '$remediation_actions' },
     {
@@ -94,7 +94,7 @@ const remediationSummary = dbInstance.fraud_incident_cases.aggregate(remediation
 printjson(remediationSummary);
 
 // 4. Single-pass security dashboard summary using $facet
-print('--- Multi-Faceted Security Dashboard Summary ---');
+print('Multi-Faceted Security Dashboard Summary');
 const dashboardPipeline = [
     {
         $facet: {

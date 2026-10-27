@@ -3,7 +3,7 @@
 
 -- Test 1: Atomic P2P Transfer (Commit)
 -- John Adeyemi (0123456789) transfers 5,000 NGN to Sarah Okafor (0223456781)
-\echo '=== Running Test 1: Atomic Transfer with Commit ==='
+\echo 'Running Test 1: Atomic Transfer with Commit'
 
 -- Pre-transfer balances
 SELECT account_number, account_type, available_balance, ledger_balance, account_status
@@ -48,7 +48,7 @@ ORDER BY t.created_at;
 
 -- Test 2: Insufficient funds exception and automatic rollback
 -- Ibrahim Danjuma (0723456786, balance ~8,500 NGN) tries to send 50,000 NGN
-\echo '=== Running Test 2: Insufficient Funds Rollback ==='
+\echo 'Running Test 2: Insufficient Funds Rollback'
 
 SELECT account_number, available_balance, ledger_balance 
 FROM accounts 
@@ -78,7 +78,7 @@ FROM accounts
 WHERE account_number = '0723456786';
 
 -- Test 3: Restricted account debit (FROZEN_PND)
-\echo '=== Running Test 3: Frozen Account Debit Block ==='
+\echo 'Running Test 3: Frozen Account Debit Block'
 
 SELECT account_number, account_status, available_balance 
 FROM accounts 
@@ -107,7 +107,7 @@ FROM accounts
 WHERE account_number = '0124456789';
 
 -- Test 4: Savepoint and partial failure recovery
-\echo '=== Running Test 4: Sub-transaction Savepoint Rollback ==='
+\echo 'Running Test 4: Sub-transaction Savepoint Rollback'
 
 DO $$
 DECLARE
