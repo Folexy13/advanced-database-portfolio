@@ -1,19 +1,9 @@
-// MIT 8103: Advanced Database Systems
-// Continuous Assessment: Portfolio 4 - NoSQL and Advanced Data Models
-// Case Study: FinPay Technologies Ltd
-// File: 02-mongo-seed.js
-// Description: Synthetic telemetry events and polymorphic fraud case documents
-//              cross-referenced with PostgreSQL customer and account records.
-// Author: Folajimi
+// Telemetry and incident seed data for FinPay MongoDB
+const dbInstance = db.getSiblingDB('finpay_nosql');
 
-const dbName = 'finpay_nosql';
-const dbInstance = db.getSiblingDB(dbName);
+print('Seeding telemetry events...');
 
-print('Seeding FinPay MongoDB Collections on ' + dbName + '...');
-
-// ============================================================================
-// 1. SEED: device_telemetry
-// ============================================================================
+// 1. device_telemetry records
 const telemetryEvents = [
     // Customer 1: John Adeyemi - Normal Mobile App Usage in Lagos
     {
@@ -198,9 +188,7 @@ const telemetryEvents = [
 dbInstance.device_telemetry.insertMany(telemetryEvents);
 print('Inserted ' + telemetryEvents.length + ' device telemetry records.');
 
-// ============================================================================
-// 2. SEED: fraud_incident_cases (Polymorphic Documents)
-// ============================================================================
+// 2. fraud_incident_cases records
 const fraudCases = [
     {
         case_id: 'CASE-2026-OCT-001',

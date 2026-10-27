@@ -1,4 +1,3 @@
--- ============================================================================
 -- MIT 8103: Advanced Database Systems
 -- Continuous Assessment: Portfolio 1 - Database Design and Modelling
 -- Case Study: FinPay Technologies Ltd (Core Banking & Payment Settlement System)
@@ -6,7 +5,6 @@
 -- Description: DDL Schema definition with relational tables, primary keys,
 --              foreign keys, and data integrity constraints.
 -- Target RDBMS: PostgreSQL 14+ (Compatible with ANSI SQL standards)
--- ============================================================================
 
 -- Ensure pgcrypto is available for UUID generation (PostgreSQL 13+ includes gen_random_uuid() natively)
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
@@ -21,11 +19,9 @@ DROP TABLE IF EXISTS accounts CASCADE;
 DROP TABLE IF EXISTS customers CASCADE;
 DROP TABLE IF EXISTS kyc_tiers CASCADE;
 
--- ============================================================================
 -- 1. ENTITY: kyc_tiers (Reference/Lookup Table)
 -- Purpose: Defines regulatory KYC tier ceilings mandated by the Central Bank
 --          of Nigeria (CBN) for mobile money & digital banking operations.
--- ============================================================================
 CREATE TABLE kyc_tiers (
     tier_level INT PRIMARY KEY,
     tier_name VARCHAR(50) NOT NULL UNIQUE,
@@ -39,11 +35,9 @@ CREATE TABLE kyc_tiers (
 
 COMMENT ON TABLE kyc_tiers IS 'Reference table for CBN-mandated customer KYC tier classifications and transfer limits.';
 
--- ============================================================================
 -- 2. ENTITY: customers (Customer Master Data)
 -- Purpose: Stores verified personal information, hashed national identifiers,
 --          contact details, and current KYC standing.
--- ============================================================================
 CREATE TABLE customers (
     customer_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name VARCHAR(50) NOT NULL,
@@ -63,11 +57,9 @@ CREATE TABLE customers (
 
 COMMENT ON TABLE customers IS 'Master record of FinPay retail and merchant customers with hashed identity credentials.';
 
--- ============================================================================
 -- 3. ENTITY: accounts (Financial Accounts & Digital Wallets)
 -- Purpose: Maintains 10-digit NUBAN accounts, balance ledgers, and operational
 --          statuses with strict non-negative constraints.
--- ============================================================================
 CREATE TABLE accounts (
     account_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID NOT NULL REFERENCES customers(customer_id) ON DELETE RESTRICT,
@@ -89,11 +81,9 @@ CREATE TABLE accounts (
 
 COMMENT ON TABLE accounts IS 'Core banking accounts and digital wallets with real-time available and ledger balances.';
 
--- ============================================================================
 -- 4. ENTITY: beneficiaries (Saved Payees Directory)
 -- Purpose: Accelerates repetitive P2P and inter-bank transfers by caching
 --          verified counterparty account numbers and destination routing codes.
--- ============================================================================
 CREATE TABLE beneficiaries (
     beneficiary_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID NOT NULL REFERENCES customers(customer_id) ON DELETE CASCADE,
@@ -109,11 +99,9 @@ CREATE TABLE beneficiaries (
 
 COMMENT ON TABLE beneficiaries IS 'Frequent transfer recipient directory per customer.';
 
--- ============================================================================
 -- 5. ENTITY: transactions (Core Financial Ledger)
 -- Purpose: Immutable double-entry transaction journal recording all fund
 --          movements, fees, balance checkpoints, and classifications.
--- ============================================================================
 CREATE TABLE transactions (
     transaction_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     transaction_reference VARCHAR(64) NOT NULL UNIQUE,
@@ -144,11 +132,9 @@ CREATE TABLE transactions (
 
 COMMENT ON TABLE transactions IS 'Primary financial ledger recording all debits, credits, charges, and running balances.';
 
--- ============================================================================
 -- 6. ENTITY: transfers (NIP and P2P Settlement Specifics)
 -- Purpose: Subtype table capturing inter-bank routing metadata, NIBSS session
 --          identifiers, channels, and counterparty details.
--- ============================================================================
 CREATE TABLE transfers (
     transfer_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     transaction_id UUID NOT NULL REFERENCES transactions(transaction_id) ON DELETE RESTRICT,
@@ -168,11 +154,9 @@ CREATE TABLE transfers (
 
 COMMENT ON TABLE transfers IS 'Detailed payment settlement records for internal P2P and external NIBSS Instant Payments.';
 
--- ============================================================================
 -- 7. ENTITY: fraud_alerts (Risk & AML Surveillance)
 -- Purpose: Automatically flags anomalous activities (rapid balance drain,
 --          unusual transaction velocities, limit threshold breaches).
--- ============================================================================
 CREATE TABLE fraud_alerts (
     alert_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     account_id UUID NOT NULL REFERENCES accounts(account_id) ON DELETE CASCADE,
@@ -198,11 +182,9 @@ CREATE TABLE fraud_alerts (
 
 COMMENT ON TABLE fraud_alerts IS 'Compliance and risk monitoring incident log for suspicious financial behavior.';
 
--- ============================================================================
 -- 8. ENTITY: audit_logs (Immutable Change-Data-Capture Trail)
 -- Purpose: Enterprise forensics table tracking administrative and financial state
 --          mutations with previous and updated JSON representations.
--- ============================================================================
 CREATE TABLE audit_logs (
     log_id BIGSERIAL PRIMARY KEY,
     table_name VARCHAR(50) NOT NULL,

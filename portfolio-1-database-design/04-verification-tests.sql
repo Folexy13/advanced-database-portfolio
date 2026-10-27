@@ -1,16 +1,12 @@
--- ============================================================================
 -- MIT 8103: Advanced Database Systems
 -- Continuous Assessment: Portfolio 1 - Database Design and Modelling
 -- Case Study: FinPay Technologies Ltd
 -- File: 04-verification-tests.sql
 -- Description: Test suite verifying schema constraints, relational integrity,
 --              referential cascades, and ledger business rules.
--- ============================================================================
 
--- ============================================================================
 -- TEST 1: Entity Count & Baseline Inventory
 -- Verifies that all baseline records have loaded successfully across all tables.
--- ============================================================================
 SELECT 'kyc_tiers' AS entity, COUNT(*) AS total_records FROM kyc_tiers
 UNION ALL
 SELECT 'customers', COUNT(*) FROM customers
@@ -27,10 +23,8 @@ SELECT 'fraud_alerts', COUNT(*) FROM fraud_alerts
 UNION ALL
 SELECT 'audit_logs', COUNT(*) FROM audit_logs;
 
--- ============================================================================
 -- TEST 2: Relational Join - Customer Master Portfolio Overview
 -- Verifies multi-table relationships (customers -> kyc_tiers -> accounts).
--- ============================================================================
 SELECT 
     c.customer_id,
     c.first_name || ' ' || c.last_name AS full_name,
@@ -46,10 +40,8 @@ JOIN kyc_tiers kt ON c.kyc_tier = kt.tier_level
 JOIN accounts a ON c.customer_id = a.customer_id
 ORDER BY c.first_name, a.account_number;
 
--- ============================================================================
 -- TEST 3: Double-Entry P2P Transfer Audit
 -- Verifies that John Adeyemi's debit leg matches Sarah Okafor's credit leg exactly.
--- ============================================================================
 SELECT 
     t.transaction_reference,
     t.created_at,
@@ -66,10 +58,8 @@ JOIN customers c ON a.customer_id = c.customer_id
 WHERE t.transaction_reference IN ('FP-TRF-20261002-0001', 'FP-TRF-20261002-0002')
 ORDER BY t.created_at;
 
--- ============================================================================
 -- TEST 4: Integrity Constraint Assertions (Deliberate Negative Tests)
 -- Each query inside the DO blocks demonstrates that the engine rejects invalid data.
--- ============================================================================
 
 -- Assertion 4A: Negative Balance Constraint
 -- Expected Result: Rejection with chk_available_balance_non_negative violation
@@ -123,10 +113,8 @@ EXCEPTION
         RAISE NOTICE 'SUCCESS (Test 4D): Debit on restricted account correctly blocked by trigger: %', SQLERRM;
 END $$;
 
--- ============================================================================
 -- TEST 5: Regulatory Compliance & KYC Limit Monitoring Query
 -- Checks whether any account balance exceeds its assigned KYC tier cap.
--- ============================================================================
 SELECT 
     c.customer_id,
     c.first_name || ' ' || c.last_name AS customer_name,

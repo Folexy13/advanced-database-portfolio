@@ -6,10 +6,8 @@
 --              Captures optimized execution plans, scan types, buffer reads, and speedups.
 -- Author: Folajimi
 
--- ============================================================================
 -- QUERY 1 (OPTIMIZED): High-Velocity Rapid Transfer Surveillance
 -- Expected Improvement: Uses covering composite index on transactions.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     a.account_id,
@@ -28,11 +26,9 @@ GROUP BY a.account_id, a.account_number, c.first_name, c.last_name
 HAVING COUNT(t.transaction_id) >= 3 AND SUM(t.amount) > 100000.0000
 ORDER BY total_transferred DESC;
 
--- ============================================================================
 -- QUERY 2 (OPTIMIZED): EOD Inter-Bank NIP Settlement & Reconciliation Audit
 -- Expected Improvement: Sequential Scan on 5,004 rows replaced by Bitmap Index Scan
 --                       utilizing idx_transfers_exceptions_partial.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     tr.destination_bank_code,
@@ -48,11 +44,9 @@ WHERE tr.transfer_status IN ('FAILED', 'REVERSED')
 GROUP BY tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status
 ORDER BY total_exception_amount DESC;
 
--- ============================================================================
 -- QUERY 3 (OPTIMIZED): Customer Account Statement with Running Balance
 -- Expected Improvement: Eliminates expensive Sort node prior to WindowAgg via
 --                       pre-sorted composite index idx_transactions_account_created_composite.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     t.created_at AS txn_timestamp,
@@ -75,11 +69,9 @@ WHERE a.account_number = '0123456789'
   AND t.created_at >= '2026-05-01 00:00:00+01'
 ORDER BY t.created_at DESC;
 
--- ============================================================================
 -- QUERY 4 (OPTIMIZED): Regulatory Compliance - CBN Daily KYC Ceiling Breach Check
 -- Expected Improvement: Uses covering composite index idx_transactions_debit_status_created
 --                       with INCLUDE (amount), drastically reducing execution cost and buffers.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 WITH daily_debits AS (
     SELECT 
@@ -110,11 +102,9 @@ JOIN kyc_tiers kt ON c.kyc_tier = kt.tier_level
 WHERE dd.total_daily_debit > kt.daily_transaction_limit
 ORDER BY dd.settlement_date DESC, excess_amount DESC;
 
--- ============================================================================
 -- QUERY 5 (OPTIMIZED): Merchant Wallet Turnover & Transaction Fee Generation
 -- Expected Improvement: Employs covering partial index idx_accounts_merchant_covering,
 --                       eliminating sequential scans on the accounts table.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     a.account_number,

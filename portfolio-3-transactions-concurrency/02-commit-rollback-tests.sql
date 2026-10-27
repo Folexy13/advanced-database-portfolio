@@ -1,27 +1,17 @@
--- MIT 8103: Advanced Database Systems
--- Continuous Assessment: Portfolio 3 - Transactions and Concurrency
--- Case Study: FinPay Technologies Ltd
--- File: 02-commit-rollback-tests.sql
--- Description: Empirical validation of ACID properties (Atomicity, Consistency,
---              Isolation, Durability) demonstrating explicit COMMIT and ROLLBACK.
--- Author: Folajimi
+-- Empirical tests for ACID properties (Commit, Rollback, Savepoints)
+-- MIT 8103 Advanced Database Systems - Portfolio 3
 
--- ============================================================================
--- TEST 1: Atomic P2P Transfer with Successful COMMIT
--- Scenario: John Adeyemi (0123456789) transfers 5,000 NGN to Sarah Okafor (0223456781).
--- Demonstrates: All-or-nothing execution. Both accounts mutate and ledger logs match.
--- ============================================================================
-\echo '----------------------------------------------------------------------'
-\echo 'TEST 1: ATOMIC P2P TRANSFER (SUCCESSFUL COMMIT)'
-\echo '----------------------------------------------------------------------'
+-- Test 1: Atomic P2P Transfer (Commit)
+-- John Adeyemi (0123456789) transfers 5,000 NGN to Sarah Okafor (0223456781)
+\echo '=== Running Test 1: Atomic Transfer with Commit ==='
 
--- 1A: Inspect Pre-Transfer Balances
+-- Pre-transfer balances
 SELECT account_number, account_type, available_balance, ledger_balance, account_status
 FROM accounts
 WHERE account_number IN ('0123456789', '0223456781')
 ORDER BY account_number;
 
--- 1B: Execute Stored Transfer Procedure
+-- Execute transfer function
 SELECT * FROM sp_execute_fund_transfer(
     '0123456789',
     '0223456781',
@@ -33,13 +23,13 @@ SELECT * FROM sp_execute_fund_transfer(
     'MOBILE_APP'
 );
 
--- 1C: Verify Post-Transfer Balances (John: -5000 NGN, Sarah: +5000 NGN)
+-- Post-transfer balances (John -5000 NGN, Sarah +5000 NGN)
 SELECT account_number, account_type, available_balance, ledger_balance, account_status
 FROM accounts
 WHERE account_number IN ('0123456789', '0223456781')
 ORDER BY account_number;
 
--- 1D: Verify Ledger Integrity (Debits match Credits exactly)
+-- Ledger record audit
 SELECT 
     t.transaction_reference,
     t.account_id,
@@ -56,21 +46,14 @@ JOIN accounts a ON t.account_id = a.account_id
 WHERE t.narration LIKE '%Tuition fee reimbursement%'
 ORDER BY t.created_at;
 
--- ============================================================================
--- TEST 2: Insufficient Funds Exception with Automatic ROLLBACK
--- Scenario: Ibrahim Danjuma (0723456786, balance ~8,500 NGN) attempts to transfer 50,000 NGN.
--- Expected: Exception raised, transaction rolled back, sender balance remains 100% intact.
--- ============================================================================
-\echo '----------------------------------------------------------------------'
-\echo 'TEST 2: INSUFFICIENT FUNDS (AUTOMATIC ROLLBACK)'
-\echo '----------------------------------------------------------------------'
+-- Test 2: Insufficient funds exception and automatic rollback
+-- Ibrahim Danjuma (0723456786, balance ~8,500 NGN) tries to send 50,000 NGN
+\echo '=== Running Test 2: Insufficient Funds Rollback ==='
 
--- 2A: Pre-Test Balance
 SELECT account_number, available_balance, ledger_balance 
 FROM accounts 
 WHERE account_number = '0723456786';
 
--- 2B: Execution Block with Exception Handling
 DO $$
 BEGIN
     PERFORM sp_execute_fund_transfer(
@@ -83,25 +66,19 @@ BEGIN
         'Attempted excess transfer',
         'MOBILE_APP'
     );
-    RAISE EXCEPTION 'TEST FAILED: Transfer should have been blocked!';
+    RAISE EXCEPTION 'Test failed: Transfer should not have succeeded!';
 EXCEPTION
     WHEN OTHERS THEN
-        RAISE NOTICE 'TRANSACTION ABORTED & ROLLED BACK AS EXPECTED: %', SQLERRM;
+        RAISE NOTICE 'Rollback verified: %', SQLERRM;
 END $$;
 
--- 2C: Post-Test Balance Verification (Must be identical to Pre-Test)
+-- Verify balance is unchanged
 SELECT account_number, available_balance, ledger_balance 
 FROM accounts 
 WHERE account_number = '0723456786';
 
--- ============================================================================
--- TEST 3: Debit on Restricted Account (FROZEN_PND) with ROLLBACK
--- Scenario: Olumide Fashola (0124456789) is in Post-No-Debit (PND) status.
--- Expected: Operational status guard intercepts debit, aborts transaction, rolls back.
--- ============================================================================
-\echo '----------------------------------------------------------------------'
-\echo 'TEST 3: RESTRICTED ACCOUNT DEBIT (FROZEN_PND ROLLBACK)'
-\echo '----------------------------------------------------------------------'
+-- Test 3: Restricted account debit (FROZEN_PND)
+\echo '=== Running Test 3: Frozen Account Debit Block ==='
 
 SELECT account_number, account_status, available_balance 
 FROM accounts 
@@ -119,53 +96,45 @@ BEGIN
         'Illegal transfer from frozen account',
         'MOBILE_APP'
     );
-    RAISE EXCEPTION 'TEST FAILED: Transfer from PND account should have been blocked!';
+    RAISE EXCEPTION 'Test failed: Transfer from PND account should have been blocked!';
 EXCEPTION
     WHEN OTHERS THEN
-        RAISE NOTICE 'TRANSACTION ABORTED & ROLLED BACK AS EXPECTED: %', SQLERRM;
+        RAISE NOTICE 'Rollback verified: %', SQLERRM;
 END $$;
 
 SELECT account_number, account_status, available_balance 
 FROM accounts 
 WHERE account_number = '0124456789';
 
--- ============================================================================
--- TEST 4: Partial Failure Simulation Using Transaction SAVEPOINTS
--- Demonstrates: Fine-grained transaction management where a failed batch sub-operation
---               is rolled back to a SAVEPOINT while preserving the outer transaction.
--- ============================================================================
-\echo '----------------------------------------------------------------------'
-\echo 'TEST 4: TRANSACTION SAVEPOINT AND SELECTIVE ROLLBACK'
-\echo '----------------------------------------------------------------------'
+-- Test 4: Savepoint and partial failure recovery
+\echo '=== Running Test 4: Sub-transaction Savepoint Rollback ==='
 
 DO $$
 DECLARE
     v_balance_before NUMERIC(18, 4);
 BEGIN
     SELECT available_balance INTO v_balance_before FROM accounts WHERE account_number = '0123456789';
-    RAISE NOTICE 'Starting transaction. John initial balance: % NGN', v_balance_before;
+    RAISE NOTICE 'Starting transaction. Initial balance: % NGN', v_balance_before;
 
-    -- Sub-operation 1: Valid fund transfer (John -> Sarah 1,000 NGN)
+    -- Sub-operation 1: Valid transfer
     PERFORM sp_execute_fund_transfer(
         '0123456789', '0223456781', '000000', 'FinPay Internal', 'Sarah Okafor',
         1000.0000, 'Savepoint valid leg 1'
     );
-    RAISE NOTICE 'Sub-operation 1 completed successfully.';
+    RAISE NOTICE 'Leg 1 finished.';
 
-    -- Sub-operation 2: Wrapped in nested BEGIN ... EXCEPTION block (PostgreSQL internal savepoint)
+    -- Sub-operation 2: Simulated crash caught in nested block
     BEGIN
-        -- Deliberately attempt an illegal operation simulating an external partner crash
         UPDATE accounts SET available_balance = available_balance / 0 WHERE account_number = '0123456789';
     EXCEPTION
         WHEN division_by_zero THEN
-            RAISE NOTICE 'Sub-operation 2 failed (division_by_zero)! Sub-transaction rolled back cleanly to savepoint.';
+            RAISE NOTICE 'Caught division by zero. Rolled back sub-operation 2 to savepoint.';
     END;
 
-    -- Outer transaction commits successfully
-    RAISE NOTICE 'Outer transaction finished. Leg 1 transfer preserved.';
+    RAISE NOTICE 'Outer transaction committed. Leg 1 preserved.';
 END $$;
 
--- Verify that Leg 1 was preserved while the flawed operation was safely undone
+-- Verify leg 1 persisted
 SELECT account_number, available_balance 
 FROM accounts 
 WHERE account_number IN ('0123456789', '0223456781')

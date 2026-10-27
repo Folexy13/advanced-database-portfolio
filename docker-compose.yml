@@ -1,8 +1,5 @@
 services:
-  # ============================================================================
-  # FinPay Primary Relational Database (PostgreSQL 16)
-  # Used for Portfolios 1, 2, 3, and 5 (Core Ledger, Queries, ACID & Sharding)
-  # ============================================================================
+  # Primary PostgreSQL 16 database for FinPay
   finpay-postgres:
     image: postgres:16-alpine
     container_name: finpay-postgres
@@ -13,15 +10,12 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-FinPaySecure2026!}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      # Defaults to host port 5434 to avoid collision with standard 5432/5433
       - "${POSTGRES_PORT:-5434}:5432"
     volumes:
       - finpay_postgres_data:/var/lib/postgresql/data
-      # Automated initialization on first container creation
       - ./portfolio-1-database-design/01-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
       - ./portfolio-1-database-design/02-constraints.sql:/docker-entrypoint-initdb.d/02-constraints.sql:ro
       - ./portfolio-1-database-design/03-seed-data.sql:/docker-entrypoint-initdb.d/03-seed-data.sql:ro
-      # Mount directory for executing verification and analytical queries
       - ./portfolio-1-database-design:/portfolio-1:ro
       - ./portfolio-2-query-optimisation:/portfolio-2:ro
       - ./portfolio-3-transactions-concurrency:/portfolio-3:ro
@@ -33,10 +27,7 @@ services:
     networks:
       - finpay_network
 
-  # ============================================================================
-  # FinPay NoSQL Document Store (MongoDB 7.0)
-  # Pre-configured for Portfolio 4 (Audit Telemetry, Logs & Polyglot Persistence)
-  # ============================================================================
+  # MongoDB 7.0 document store for telemetry and audit cases
   finpay-mongo:
     image: mongo:7.0
     container_name: finpay-mongo
@@ -46,7 +37,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-FinPayMongo2026!}
       MONGO_INITDB_DATABASE: ${MONGO_DB:-finpay_nosql}
     ports:
-      # Defaults to host port 27018 to avoid collisions with default local mongo instances
       - "${MONGO_PORT:-27018}:27017"
     volumes:
       - finpay_mongo_data:/data/db

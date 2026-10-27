@@ -1,24 +1,18 @@
--- ============================================================================
 -- MIT 8103: Advanced Database Systems
 -- Continuous Assessment: Portfolio 1 - Database Design and Modelling
 -- Case Study: FinPay Technologies Ltd
 -- File: 03-seed-data.sql
 -- Description: Realistic baseline dataset reflecting the Nigerian fintech
 --              ecosystem (Customers, KYC tiers, Accounts, Transfers, Audit).
--- ============================================================================
 
--- ============================================================================
 -- 1. SEED: kyc_tiers (CBN Regulatory Standards)
--- ============================================================================
 INSERT INTO kyc_tiers (tier_level, tier_name, daily_transaction_limit, single_transaction_limit, max_balance_limit, description)
 VALUES 
 (1, 'Tier 1 - Basic Wallet', 50000.00, 20000.00, 300000.00, 'Requires phone number and basic personal info. No BVN required.'),
 (2, 'Tier 2 - Verified Individual', 200000.00, 50000.00, 500000.00, 'Requires verified National Identity Number (NIN) and residential address.'),
 (3, 'Tier 3 - Premium Account', 5000000.00, 1000000.00, NULL, 'Fully verified account requiring BVN, NIN, proof of address, and utility bill. No balance cap.');
 
--- ============================================================================
 -- 2. SEED: customers
--- ============================================================================
 INSERT INTO customers (customer_id, first_name, last_name, email, phone_number, bvn_hash, nin_hash, kyc_tier, account_status)
 VALUES 
 ('a0000000-0000-0000-0000-000000000001', 'John', 'Adeyemi', 'john.adeyemi@finpay.ng', '+2348011234567', 
@@ -66,9 +60,7 @@ VALUES
  '9a0f4438b8d4c9a83709b4d8307dbbe51909e46a788bb2cfae89921477431201', 
  '8b1e5549c9e5da9481a0c5e9418eccf6201af57b899cc3dfbf90032588542312', 3, 'ACTIVE');
 
--- ============================================================================
 -- 3. SEED: accounts (10-digit NUBAN Format)
--- ============================================================================
 INSERT INTO accounts (account_id, customer_id, account_number, account_type, currency, available_balance, ledger_balance, account_status)
 VALUES 
 ('b0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001', '0123456789', 'SAVINGS', 'NGN', 125000.0000, 125000.0000, 'ACTIVE'),
@@ -85,9 +77,7 @@ VALUES
 ('b0000000-0000-0000-0000-000000000012', 'a0000000-0000-0000-0000-000000000011', '0124456789', 'SAVINGS', 'NGN', 12000.0000, 12000.0000, 'FROZEN_PND'),
 ('b0000000-0000-0000-0000-000000000013', 'a0000000-0000-0000-0000-000000000012', '0123556789', 'MERCHANT_WALLET', 'NGN', 5800000.0000, 5800000.0000, 'ACTIVE');
 
--- ============================================================================
 -- 4. SEED: beneficiaries (Saved Payees)
--- ============================================================================
 INSERT INTO beneficiaries (customer_id, beneficiary_account_number, bank_code, bank_name, account_name, nickname)
 VALUES 
 ('a0000000-0000-0000-0000-000000000001', '0223456781', '000000', 'FinPay Internal', 'Sarah Okafor', 'Sarah Sister'),
@@ -96,7 +86,6 @@ VALUES
 ('a0000000-0000-0000-0000-000000000003', '0123456789', '000000', 'FinPay Internal', 'John Adeyemi', 'John Partner'),
 ('a0000000-0000-0000-0000-000000000006', '0123556789', '000000', 'FinPay Internal', 'Ngozi Okonjo', 'Mama Put Groceries');
 
--- ============================================================================
 -- 5. SEED: transactions (Coherent Double-Entry Ledger)
 -- Scenario 1: Initial Deposit for John Adeyemi (₦150,000.00)
 -- Scenario 2: P2P Intra-bank Transfer: John Adeyemi sends ₦25,000.00 to Sarah Okafor
@@ -104,7 +93,6 @@ VALUES
 --             - Credit Sarah (b0000000-...-0003): +₦25,000 (balance after ₦110,000)
 -- Scenario 3: Inter-bank NIP Transfer from David Bello to GTBank (₦50,000.00 + ₦10.75 fee)
 -- Scenario 4: Bill Payment (Electricity Disco token) by Folake Balogun (₦15,000.00 + ₦100 fee)
--- ============================================================================
 INSERT INTO transactions (transaction_id, transaction_reference, account_id, transaction_type, category, amount, fee, balance_after, status, narration, created_at)
 VALUES 
 -- John Adeyemi Initial Opening Deposit
@@ -147,9 +135,7 @@ VALUES
  'DEBIT', 'INTER_TRANSFER_NIP', 45000.0000, 10.7500, 15000.0000, 'FAILED', 'Failed Transfer - Switch Timeout NIBSS 91', 
  '2026-10-06 20:00:00+01');
 
--- ============================================================================
 -- 6. SEED: transfers (Settlement Specifics)
--- ============================================================================
 INSERT INTO transfers (transfer_id, transaction_id, source_account_id, destination_bank_code, destination_bank_name, destination_account_number, destination_account_name, nip_session_id, channel, transfer_status, created_at)
 VALUES 
 ('d0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000003', 'b0000000-0000-0000-0000-000000000001', 
@@ -161,9 +147,7 @@ VALUES
 ('d0000000-0000-0000-0000-000000000003', 'c0000000-0000-0000-0000-000000000008', 'b0000000-0000-0000-0000-000000000005', 
  '000014', 'Access Bank Plc', '0029384756', 'Kalu Kalu', '999014261006200000000098765432', 'WEB', 'FAILED', '2026-10-06 20:00:00+01');
 
--- ============================================================================
 -- 7. SEED: fraud_alerts (Risk Surveillance Baseline)
--- ============================================================================
 INSERT INTO fraud_alerts (alert_id, account_id, transaction_id, rule_code, risk_score, severity, status, review_notes, created_at)
 VALUES 
 ('e0000000-0000-0000-0000-000000000001', 'b0000000-0000-0000-0000-000000000005', 'c0000000-0000-0000-0000-000000000008', 
@@ -176,9 +160,7 @@ VALUES
  'Multiple repeated authentication and high velocity queries on restricted PND account from foreign IP.', 
  '2026-10-07 03:15:22+01');
 
--- ============================================================================
 -- 8. SEED: audit_logs (Initial Snapshot)
--- ============================================================================
 INSERT INTO audit_logs (table_name, record_id, action, old_state, new_state, changed_by, client_ip)
 VALUES 
 ('customers', 'a0000000-0000-0000-0000-000000000011', 'UPDATE', 

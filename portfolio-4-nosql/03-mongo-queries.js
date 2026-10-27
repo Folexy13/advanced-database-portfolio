@@ -1,20 +1,10 @@
-// MIT 8103: Advanced Database Systems
-// Continuous Assessment: Portfolio 4 - NoSQL and Advanced Data Models
-// Case Study: FinPay Technologies Ltd
-// File: 03-mongo-queries.js
-// Description: Advanced MongoDB aggregation pipelines for fraud detection,
-//              device velocity, and compliance audit reporting.
-// Author: Folajimi
+// FinPay MongoDB Analytics & Aggregation Queries
+// MIT 8103 Advanced Database Systems - Portfolio 4
 
-const dbName = 'finpay_nosql';
-const dbInstance = db.getSiblingDB(dbName);
+const dbInstance = db.getSiblingDB('finpay_nosql');
 
-print('======================================================================');
-print('AGGREGATION PIPELINE 1: SUSPICIOUS VPN & ANOMALOUS ACCESS SURVEILLANCE');
-print('Business Purpose: Identifies all customer sessions flagged with VPN usage');
-print('                  or unauthorized foreign login locations.');
-print('======================================================================');
-
+// 1. Detect suspicious logins (VPN usage or logins outside Nigeria)
+print('--- Suspicious VPN & Foreign Access Queries ---');
 const vpnAlertPipeline = [
     {
         $match: {
@@ -45,12 +35,8 @@ const vpnAlertPipeline = [
 const vpnAlerts = dbInstance.device_telemetry.aggregate(vpnAlertPipeline).toArray();
 printjson(vpnAlerts);
 
-print('======================================================================');
-print('AGGREGATION PIPELINE 2: CUSTOMER DEVICE DIVERSITY & PLATFORM VELOCITY');
-print('Business Purpose: Detects credential stuffing by measuring distinct devices');
-print('                  and platforms utilized per customer.');
-print('======================================================================');
-
+// 2. Measure distinct devices and platforms per customer (credential stuffing detection)
+print('--- Customer Device Diversity & Platform Velocity ---');
 const deviceVelocityPipeline = [
     {
         $group: {
@@ -80,12 +66,8 @@ const deviceVelocityPipeline = [
 const velocityReport = dbInstance.device_telemetry.aggregate(deviceVelocityPipeline).toArray();
 printjson(velocityReport);
 
-print('======================================================================');
-print('AGGREGATION PIPELINE 3: FRAUD CASE REMEDIATION BREAKDOWN ($unwind)');
-print('Business Purpose: Aggregates confirmed vs pending fraud cases and counts');
-print('                  remediation actions enforced across incident files.');
-print('======================================================================');
-
+// 3. Count remediation actions across incident files using $unwind
+print('--- Fraud Case Remediation Breakdown ---');
 const remediationPipeline = [
     { $unwind: '$remediation_actions' },
     {
@@ -111,12 +93,8 @@ const remediationPipeline = [
 const remediationSummary = dbInstance.fraud_incident_cases.aggregate(remediationPipeline).toArray();
 printjson(remediationSummary);
 
-print('======================================================================');
-print('AGGREGATION PIPELINE 4: MULTI-FACETED SECURITY AUDIT DASHBOARD ($facet)');
-print('Business Purpose: Single-pass pipeline computing platform distributions,');
-print('                  top event types, and critical fraud case summaries.');
-print('======================================================================');
-
+// 4. Single-pass security dashboard summary using $facet
+print('--- Multi-Faceted Security Dashboard Summary ---');
 const dashboardPipeline = [
     {
         $facet: {

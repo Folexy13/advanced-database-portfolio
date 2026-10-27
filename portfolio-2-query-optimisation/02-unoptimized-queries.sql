@@ -7,11 +7,9 @@
 --              baseline execution cost, execution time, buffer reads, and scan nodes.
 -- Author: Folajimi
 
--- ============================================================================
 -- QUERY 1: High-Velocity Rapid Transfer Surveillance (AML Anti-Money Laundering)
 -- Business Objective: Identify accounts sending 3+ transfers totaling > ₦100,000
 --                     during a designated monthly audit window (August 2026).
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     a.account_id,
@@ -30,11 +28,9 @@ GROUP BY a.account_id, a.account_number, c.first_name, c.last_name
 HAVING COUNT(t.transaction_id) >= 3 AND SUM(t.amount) > 100000.0000
 ORDER BY total_transferred DESC;
 
--- ============================================================================
 -- QUERY 2: EOD Inter-Bank NIP Settlement & Reconciliation Audit
 -- Business Objective: Aggregate unsettled, failed, and reversed inter-bank transfers
 --                     by destination bank institution for clearinghouse dispute resolution.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     tr.destination_bank_code,
@@ -50,11 +46,9 @@ WHERE tr.transfer_status IN ('FAILED', 'REVERSED')
 GROUP BY tr.destination_bank_code, tr.destination_bank_name, tr.transfer_status
 ORDER BY total_exception_amount DESC;
 
--- ============================================================================
 -- QUERY 3: Customer Account Statement with Running Balance (Window Function)
 -- Business Objective: Generate a chronological financial statement with running
 --                     balances for customer account '0123456789' over a 5-month window.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     t.created_at AS txn_timestamp,
@@ -77,11 +71,9 @@ WHERE a.account_number = '0123456789'
   AND t.created_at >= '2026-05-01 00:00:00+01'
 ORDER BY t.created_at DESC;
 
--- ============================================================================
 -- QUERY 4: Regulatory Compliance - CBN Daily KYC Tier Ceiling Breach Check
 -- Business Objective: Audit all debit transactions to detect any customer who
 --                     exceeded their regulatory daily ceiling in a 24-hour cycle.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 WITH daily_debits AS (
     SELECT 
@@ -112,11 +104,9 @@ JOIN kyc_tiers kt ON c.kyc_tier = kt.tier_level
 WHERE dd.total_daily_debit > kt.daily_transaction_limit
 ORDER BY dd.settlement_date DESC, excess_amount DESC;
 
--- ============================================================================
 -- QUERY 5: Merchant Wallet Turnover & Transaction Fee Generation Ranking
 -- Business Objective: Calculate revenue yield, gross transaction turnover, and
 --                     ticket size across all merchant wallets for financial reporting.
--- ============================================================================
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT 
     a.account_number,

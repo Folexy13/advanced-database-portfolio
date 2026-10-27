@@ -1,17 +1,13 @@
--- ============================================================================
 -- MIT 8103: Advanced Database Systems
 -- Continuous Assessment: Portfolio 1 - Database Design and Modelling
 -- Case Study: FinPay Technologies Ltd
 -- File: 02-constraints.sql
 -- Description: Business rules, operational triggers, audit trail capture,
 --              and foreign key relational indexes.
--- ============================================================================
 
--- ============================================================================
 -- 1. FOREIGN KEY & ACCESS PATH INDEXES
 -- Purpose: Accelerate join performance, enforce efficient referential integrity
 --          checks, and prevent table scans during relational queries.
--- ============================================================================
 CREATE INDEX idx_accounts_customer_id ON accounts(customer_id);
 CREATE INDEX idx_beneficiaries_customer_id ON beneficiaries(customer_id);
 CREATE INDEX idx_transactions_account_id ON transactions(account_id);
@@ -21,10 +17,8 @@ CREATE INDEX idx_transfers_transaction_id ON transfers(transaction_id);
 CREATE INDEX idx_fraud_alerts_account_id ON fraud_alerts(account_id);
 CREATE INDEX idx_audit_logs_entity ON audit_logs(table_name, record_id);
 
--- ============================================================================
 -- 2. TRIGGER FUNCTION: update_timestamp_column
 -- Purpose: Automatically updates the 'updated_at' column whenever a row is modified.
--- ============================================================================
 CREATE OR REPLACE FUNCTION fn_update_timestamp()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -43,11 +37,9 @@ BEFORE UPDATE ON accounts
 FOR EACH ROW
 EXECUTE FUNCTION fn_update_timestamp();
 
--- ============================================================================
 -- 3. TRIGGER FUNCTION: audit_account_balance_changes
 -- Purpose: Automatically records any balance or status mutation on financial
 --          accounts into the immutable audit_logs table.
--- ============================================================================
 CREATE OR REPLACE FUNCTION fn_audit_account_changes()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -92,11 +84,9 @@ AFTER UPDATE ON accounts
 FOR EACH ROW
 EXECUTE FUNCTION fn_audit_account_changes();
 
--- ============================================================================
 -- 4. TRIGGER FUNCTION: enforce_account_operational_status
 -- Purpose: Prevents debit transactions against accounts that are not in 'ACTIVE' status
 --          (e.g., FROZEN_PND - Post-No-Debit, DORMANT, or CLOSED).
--- ============================================================================
 CREATE OR REPLACE FUNCTION fn_validate_account_status_for_transaction()
 RETURNS TRIGGER AS $$
 DECLARE
