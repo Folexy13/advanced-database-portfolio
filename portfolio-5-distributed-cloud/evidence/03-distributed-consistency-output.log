@@ -1,0 +1,37 @@
+DROP TABLE
+1. Evaluating PACELC Tunable Consistency Modes in PostgreSQL (synchronous_commit)
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:40: NOTICE:  [CP / PC-EC Mode] synchronous_commit = on | Used for NIBSS NIP transfers & double-entry ledger updates.
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:40: NOTICE:  [Local Durable Mode] synchronous_commit = local | Used for beneficiary updates & session state.
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:40: NOTICE:  [AP / PA-EL Mode] synchronous_commit = off | Used for non-monetary clickstream & telemetry logs.
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:40: NOTICE:  WAL LSN verified at 0/3BA19F0
+DO
+2. Implementing Idempotent Distributed Settlement Ledger (Network Partition Recovery)
+CREATE TABLE
+3. Testing Distributed Webhook Retry & Idempotency Guard under Network Partition
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:91: NOTICE:  Webhook Delivery 1: Processed cleanly on finpay-pg-primary-01.
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:91: NOTICE:  Webhook Delivery 2 (Duplicate Retry): Intercepted by idempotency constraint. Zero double-spend.
+DO
+      idempotency_key      |         nip_session_id         |   amount   |   originating_node   | settlement_status | retry_attempts | original_txn_ref 
+---------------------------+--------------------------------+------------+----------------------+-------------------+----------------+------------------
+ IDEMP-NIP-20261030-009841 | 999000000984120261030142000abc | 25000.0000 | finpay-pg-primary-01 | PROCESSED         |              1 | FP-TRF-IDEMP-001
+(1 row)
+
+4. Simulating Primary Node Failure & Automated Standby Failover Promotion
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:130: NOTICE:  ALERT: Primary node finpay-pg-primary-01 marked OFFLINE (missed 3 Patroni etcd heartbeats).
+psql:/portfolio-5/03-distributed-cap-pacelc-verification.sql:130: NOTICE:  FAILOVER COMPLETE: Promoted finpay-pg-standby-02 to PRIMARY_WRITER | RTO: 18.40s | RPO: 0.00ms (Zero data loss).
+DO
+       node_id        |         region          |     node_role      | replication_mode | measured_lag_ms | node_status 
+----------------------+-------------------------+--------------------+------------------+-----------------+-------------
+ finpay-pg-standby-02 | NG-Lagos (Victoria Isl) | PRIMARY_WRITER     | PRIMARY          |            0.00 | HEALTHY
+ finpay-pg-replica-03 | NG-Abuja (Central)      | ASYNC_READ_REPLICA | ASYNCHRONOUS     |           14.80 | HEALTHY
+ finpay-pg-dr-04      | EU-West (Ireland DR)    | ASYNC_READ_REPLICA | ASYNCHRONOUS     |           68.25 | HEALTHY
+ finpay-pg-primary-01 | NG-Lagos (Local Zone)   | PRIMARY_WRITER     | PRIMARY          |            0.00 | OFFLINE
+(4 rows)
+
+   selected_node_id   |     selected_region     | selected_role  |                 endpoint                 |                                          routing_reason                                           
+----------------------+-------------------------+----------------+------------------------------------------+---------------------------------------------------------------------------------------------------
+ finpay-pg-standby-02 | NG-Lagos (Victoria Isl) | PRIMARY_WRITER | pg-standby.lagos.internal.finpay.ng:5432 | Write/Lock operation detected: routed strictly to Primary Writer with synchronous standby commit.
+(1 row)
+
+UPDATE 1
+UPDATE 1

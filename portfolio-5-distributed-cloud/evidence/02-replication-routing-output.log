@@ -1,0 +1,55 @@
+DROP FUNCTION
+DROP TABLE
+DROP PUBLICATION
+1. Configuring FinPay Multi-Region Cluster Topology Registry
+CREATE TABLE
+INSERT 0 4
+       node_id        |         region          |     node_role      | replication_mode | measured_lag_ms | node_status 
+----------------------+-------------------------+--------------------+------------------+-----------------+-------------
+ finpay-pg-primary-01 | NG-Lagos (Local Zone)   | PRIMARY_WRITER     | PRIMARY          |            0.00 | HEALTHY
+ finpay-pg-standby-02 | NG-Lagos (Victoria Isl) | SYNC_STANDBY       | SYNCHRONOUS      |            1.45 | HEALTHY
+ finpay-pg-replica-03 | NG-Abuja (Central)      | ASYNC_READ_REPLICA | ASYNCHRONOUS     |           14.80 | HEALTHY
+ finpay-pg-dr-04      | EU-West (Ireland DR)    | ASYNC_READ_REPLICA | ASYNCHRONOUS     |           68.25 | HEALTHY
+(4 rows)
+
+2. Creating Logical Replication Publication for Core Ledger Tables
+psql:/portfolio-5/02-replication-read-write-split.sql:48: WARNING:  wal_level is insufficient to publish logical changes
+HINT:  Set wal_level to "logical" before creating subscriptions.
+CREATE PUBLICATION
+      pubname      | puballtables | pubinsert | pubupdate | pubdelete 
+-------------------+--------------+-----------+-----------+-----------
+ finpay_ledger_pub | f            | t         | t         | f
+(1 row)
+
+      pubname      | schemaname |  tablename   
+-------------------+------------+--------------
+ finpay_ledger_pub | public     | accounts
+ finpay_ledger_pub | public     | fraud_alerts
+ finpay_ledger_pub | public     | transactions
+ finpay_ledger_pub | public     | transfers
+(4 rows)
+
+3. Inspecting Live PostgreSQL WAL Position and Recovery Role
+ is_read_replica |    active_engine_role     | current_wal_lsn | active_wal_segment_file  | configured_wal_level | max_wal_senders 
+-----------------+---------------------------+-----------------+--------------------------+----------------------+-----------------
+ f               | PRIMARY_READ_WRITE_LEADER | 0/3B9F940       | 000000010000000000000003 | replica              | 10
+(1 row)
+
+4. Implementing Read-Write Query Router Function (PgBouncer / ProxySQL Routing Logic)
+CREATE FUNCTION
+5. Verifying Read-Write Splitting Across FinPay Operational Workloads
+   selected_node_id   |    selected_region    | selected_role  |                 endpoint                 |                                          routing_reason                                           
+----------------------+-----------------------+----------------+------------------------------------------+---------------------------------------------------------------------------------------------------
+ finpay-pg-primary-01 | NG-Lagos (Local Zone) | PRIMARY_WRITER | pg-primary.lagos.internal.finpay.ng:5432 | Write/Lock operation detected: routed strictly to Primary Writer with synchronous standby commit.
+(1 row)
+
+   selected_node_id   |     selected_region     | selected_role |                 endpoint                 |                                             routing_reason                                              
+----------------------+-------------------------+---------------+------------------------------------------+---------------------------------------------------------------------------------------------------------
+ finpay-pg-standby-02 | NG-Lagos (Victoria Isl) | SYNC_STANDBY  | pg-standby.lagos.internal.finpay.ng:5432 | Session consistency required (Read-Your-Own-Writes after transfer): routed to Sync Standby (lag < 2ms).
+(1 row)
+
+   selected_node_id   |  selected_region   |   selected_role    |                 endpoint                 |                                            routing_reason                                             
+----------------------+--------------------+--------------------+------------------------------------------+-------------------------------------------------------------------------------------------------------
+ finpay-pg-replica-03 | NG-Abuja (Central) | ASYNC_READ_REPLICA | pg-replica.abuja.internal.finpay.ng:5432 | Read-only analytical workload (EOD_SETTLEMENT_ANALYTICS): offloaded to lowest-lag Async Read Replica.
+(1 row)
+

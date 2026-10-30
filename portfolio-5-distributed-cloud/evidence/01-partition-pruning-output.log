@@ -1,0 +1,80 @@
+DROP TABLE
+DROP TABLE
+1. Creating Monthly Range-Partitioned Ledger (transactions_partitioned)
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+INSERT 0 15008
+ANALYZE
+2. Inspecting Tuple Distribution Across Monthly Partitions
+     partition_name     |                          partition_range_bound                           | tuple_count | total_size 
+------------------------+--------------------------------------------------------------------------+-------------+------------
+ transactions_p2026_05  | FOR VALUES FROM ('2026-05-01 00:00:00+00') TO ('2026-06-01 00:00:00+00') |        2517 | 1184 kB
+ transactions_p2026_06  | FOR VALUES FROM ('2026-06-01 00:00:00+00') TO ('2026-07-01 00:00:00+00') |        2523 | 1184 kB
+ transactions_p2026_07  | FOR VALUES FROM ('2026-07-01 00:00:00+00') TO ('2026-08-01 00:00:00+00') |        2641 | 1240 kB
+ transactions_p2026_08  | FOR VALUES FROM ('2026-08-01 00:00:00+00') TO ('2026-09-01 00:00:00+00') |        2608 | 1224 kB
+ transactions_p2026_09  | FOR VALUES FROM ('2026-09-01 00:00:00+00') TO ('2026-10-01 00:00:00+00') |        2534 | 1192 kB
+ transactions_p2026_10  | FOR VALUES FROM ('2026-10-01 00:00:00+00') TO ('2026-11-01 00:00:00+00') |        2185 | 1056 kB
+ transactions_p2026_11  | FOR VALUES FROM ('2026-11-01 00:00:00+00') TO ('2026-12-01 00:00:00+00') |           0 | 32 kB
+ transactions_p_default | DEFAULT                                                                  |           0 | 32 kB
+(8 rows)
+
+3. Creating 4-Way Hash-Sharded Account Table (accounts_sharded)
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 215
+ANALYZE
+4. Verifying Uniform Hash Sharding Balance Across 4 Nodes
+  shard_partition  | accounts_hosted | distribution_pct | total_liquidity_ngn 
+-------------------+-----------------+------------------+---------------------
+ accounts_shard_00 |              53 |            24.65 |         25908018.36
+ accounts_shard_01 |              52 |            24.19 |         27877557.62
+ accounts_shard_02 |              51 |            23.72 |         21025634.74
+ accounts_shard_03 |              59 |            27.44 |         26387477.04
+(4 rows)
+
+5. Benchmarking Partition Pruning on October 2026 NIP Settlement Audit
+                                                                                                   QUERY PLAN                                                                                                    
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=103.73..103.77 rows=18 width=61) (actual time=0.971..0.972 rows=10 loops=1)
+   Sort Key: (sum(transactions_partitioned.amount)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=50
+   ->  HashAggregate  (cost=103.13..103.35 rows=18 width=61) (actual time=0.955..0.958 rows=10 loops=1)
+         Group Key: transactions_partitioned.category, transactions_partitioned.status
+         Batches: 1  Memory Usage: 24kB
+         Buffers: shared hit=50
+         ->  Seq Scan on transactions_p2026_10 transactions_partitioned  (cost=0.00..88.24 rows=1489 width=29) (actual time=0.008..0.440 rows=1489 loops=1)
+               Filter: ((created_at >= '2026-10-01 00:00:00+00'::timestamp with time zone) AND (created_at < '2026-11-01 00:00:00+00'::timestamp with time zone) AND ((transaction_type)::text = 'DEBIT'::text))
+               Rows Removed by Filter: 696
+               Buffers: shared hit=50
+ Planning:
+   Buffers: shared hit=135
+ Planning Time: 1.473 ms
+ Execution Time: 1.002 ms
+(16 rows)
+
+6. Verifying Single-Shard Targeting on NUBAN Lookup (John Adeyemi: 0123456789)
+                                                         QUERY PLAN                                                          
+-----------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on accounts_shard_01 accounts_sharded  (cost=0.00..2.65 rows=1 width=40) (actual time=0.010..0.015 rows=1 loops=1)
+   Filter: (account_number = '0123456789'::bpchar)
+   Rows Removed by Filter: 51
+   Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=9
+ Planning Time: 0.198 ms
+ Execution Time: 0.025 ms
+(8 rows)
+
