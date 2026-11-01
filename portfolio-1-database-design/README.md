@@ -5,6 +5,7 @@
 **Case Study:** FinPay Technologies Limited (Nigerian Digital Banking & Payment Settlement Platform)  
 **Deliverable:** Relational Schema, Normalisation Analysis, ER Diagram, Constraints & Baseline Dataset  
 **Component Score Weight:** 7 Marks  
+**Author:** Opeyemi Folajimi Aluko (`301926073`)  
 
 ---
 

@@ -2,7 +2,9 @@
 **Course Code:** MIT 8103 – Advanced Database Systems  
 **Programme:** Master of Information Technology (SPGS), MIVA Open University  
 **Academic Session:** 2026/2027 – First Semester Continuous Assessment  
-**Author:** Folajimi  
+**Student Name:** Opeyemi Folajimi Aluko  
+**Student ID:** 301926073  
+**Student Email:** o.aluko6073@miva.edu.ng  
 **Repository:** [https://github.com/Folexy13/advanced-database-portfolio](https://github.com/Folexy13/advanced-database-portfolio)  
 
 ---

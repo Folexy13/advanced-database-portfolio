@@ -5,7 +5,7 @@
 **Case Study:** FinPay Technologies Limited  
 **Deliverable:** Polyglot Architecture, MongoDB Document Models, JSON Schema Validators, TTL & Geospatial Indexing, Aggregation Pipelines  
 **Component Score Weight:** 7 Marks  
-**Author:** Folajimi  
+**Author:** Opeyemi Folajimi Aluko (`301926073`)  
 
 ---
 

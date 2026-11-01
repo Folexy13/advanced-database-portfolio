@@ -5,7 +5,7 @@
 **Case Study:** FinPay Technologies Limited  
 **Deliverable:** Declarative Range Partitioning, Hash Sharding, Primary-Replica Read/Write Splitting, CAP/PACELC Consistency Verification & Cloud HA/DR Architecture  
 **Component Score Weight:** 6 Marks  
-**Author:** Folajimi  
+**Author:** Opeyemi Folajimi Aluko (`301926073`)  
 
 ---
 

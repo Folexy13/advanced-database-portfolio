@@ -5,7 +5,7 @@
 **Case Study:** FinPay Technologies Limited  
 **Deliverable:** Synthetic Data Scaling, Analytical Banking Queries, EXPLAIN (ANALYZE, BUFFERS) Plans, Index Engineering & Performance Analysis  
 **Component Score Weight:** 7 Marks  
-**Author:** Folajimi  
+**Author:** Opeyemi Folajimi Aluko (`301926073`)  
 
 ---
 

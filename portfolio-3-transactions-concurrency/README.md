@@ -5,7 +5,7 @@
 **Case Study:** FinPay Technologies Limited  
 **Deliverable:** ACID Guarantees, Stored Procedures, Concurrency Control, Isolation Levels, and Deadlock Resolution  
 **Component Score Weight:** 7 Marks  
-**Author:** Folajimi  
+**Author:** Opeyemi Folajimi Aluko (`301926073`)  
 
 ---
 

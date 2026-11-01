@@ -1,7 +1,9 @@
 # School of Post Graduate Studies – MIVA Open University
 ## Master of Information Technology (MIT)
 **Course:** MIT 8103 – Advanced Database Systems (2026/2027 First Semester CA)  
-**Student Name:** Folajimi  
+**Student Name:** Opeyemi Folajimi Aluko  
+**Student ID:** 301926073  
+**Student Email:** o.aluko6073@miva.edu.ng  
 **GitHub Repository:** [https://github.com/Folexy13/advanced-database-portfolio](https://github.com/Folexy13/advanced-database-portfolio)  
 **Selected Case Study:** FinPay Technologies Limited (Nigerian Digital Banking & Payment Settlement Platform)  
 
